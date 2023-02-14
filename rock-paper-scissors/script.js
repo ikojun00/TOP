@@ -5,10 +5,8 @@ function getComputerChoice()
     return randomValue;
 }
 
-function playRound(computerSelection) 
+function playRound(computerSelection, playerSelection) 
 {
-    let playerSelection = prompt("What's your sign?").toLowerCase();
-
     if (playerSelection === "rock" || playerSelection === "scissors" || playerSelection === "paper") 
     {
         if(playerSelection === computerSelection)
@@ -21,36 +19,77 @@ function playRound(computerSelection)
             return "You win!";
     }
     else
-        alert("Wrong input!");
+        return -1;
+        //console.log("ERROR: playRound()");
 }
 
-function game()
+function createDOM(result)
 {
-    let counter_computer = 0;
-    let counter_player = 0;
-    while(counter_computer<5 && counter_player<5)
+    const answer = document.querySelector('.answer');
+    const content = document.createElement('p');
+    content.classList.add('content');
+    if(result === "You lose!")
+        content.textContent = 'You lose!';
+    else if(result === "You win!")
+        content.textContent = 'You win!';
+    else if(result === "Tie!")
+        content.textContent = 'Tie!';
+    else
+        return -1;
+        //console.log("ERROR: createDOM()");
+    answer.insertBefore(content, answer.firstChild);
+}
+
+function game(playerSelection)
+{
+    const span_computer = document.getElementById("computer-score");
+    const span_player = document.getElementById("player-score");
+
+    let counter_computer = parseInt(span_computer.innerText);
+    let counter_player = parseInt(span_player.innerText);
+
+    let computerSelection = getComputerChoice();
+    let result = playRound(computerSelection, playerSelection);
+    if(result === "You lose!")
     {
-        let computerSelection = getComputerChoice();
-        let result = playRound(computerSelection);
-        if(result === "You lose!")
+        counter_computer++;
+        span_computer.textContent = counter_computer;
+        createDOM(result);
+        console.log("You lose! " + "Player:" + counter_player + " Computer:" + counter_computer);
+        if(counter_computer === 5)
         {
-            counter_computer++;
-            console.log("You lose! " + "Player:" + counter_player + " Computer:" + counter_computer);
-        }
-        else if(result === "You win!")
-        {
-            counter_player++;
-            console.log("You win! " + "Player:" + counter_player + " Computer:" + counter_computer);
-        }
-        else
-        {
-            console.log("Tie! " + "Player:" + counter_player + " Computer:" + counter_computer);
+            alert("Computer won!");
+            window.location.reload();
         }
     }
-    if(counter_computer === 5)
-        return "Computer won!";
+    else if(result === "You win!")
+    {
+        counter_player++;
+        span_player.textContent = counter_player;
+        createDOM(result);
+        console.log("You win! " + "Player:" + counter_player + " Computer:" + counter_computer);
+        if(counter_player === 5)
+        {
+            alert("Player won!");
+            window.location.reload();
+        }
+    }
+    else if(result == "Tie!")
+    {
+        createDOM(result);
+        console.log("Tie! " + "Player:" + counter_player + " Computer:" + counter_computer);
+    }
     else
-        return "Player won!"
+        return -1;
+        //console.log("ERROR: game()");
 }
 
-console.log(game());
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        game(button.id);
+    });
+    });
+
+
