@@ -1,0 +1,31 @@
+.container
+{
+    width: 408px;
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(100px, auto) repeat(5, 80px);
+    gap: 2px;
+    background-color: black;
+}
+
+.display
+{
+    grid-column: 1 / -1;
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin: 5px;
+}
+
+#nine, #eight, #seven, #six, #five, #four, #three, #two, #one, #null
+{
+    background-color: lightblue;
+}
+
+#null
+{
+    grid-column: span 3;
+}
