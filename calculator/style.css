@@ -9,7 +9,7 @@
     background-color: black;
 }
 
-.display
+#display
 {
     grid-column: 1 / -1;
     background-color: lightgray;
@@ -17,6 +17,7 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-end;
+    font-size: 50px;
     margin: 5px;
 }
 
