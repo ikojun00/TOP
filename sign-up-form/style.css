@@ -1,0 +1,82 @@
+body
+{
+    color: white;
+    display: flex;
+    flex-direction: row;
+    font-family: 'Roboto', sans-serif;
+}
+
+.picture
+{
+    width: 30%;
+    position: relative;
+}
+
+.picture>img 
+{
+    width: 100%;
+    height: 100%;
+}
+
+.logo
+{
+    background-color: black;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.content
+{
+    background-color: black;
+    width: 70%;
+    padding: 2em;
+}
+
+.form
+{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 2em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+.input
+{
+    display: flex;
+    flex-direction: column;
+}
+
+button
+{
+    padding: 1em;
+}
+
+@media (max-width: 768px)
+{
+    body
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .picture
+    {
+        width: 100%;
+    }
+
+    .content
+    {
+        width: 100%;
+        padding: 0;
+    }
+}
