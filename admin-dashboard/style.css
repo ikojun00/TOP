@@ -1,0 +1,26 @@
+body
+{
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    grid-template-columns: 1fr 5fr;
+}
+
+.sidebar
+{
+    background-color: blue;
+}
+
+.header
+{
+    background-color: red;
+}
+
+.main-content
+{
+    background-color: green;
+}
+
+ul li
+{
+    list-style: none;
+}
