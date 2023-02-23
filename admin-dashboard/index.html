@@ -4,25 +4,171 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="style.css">
     <title>Admin Dashboard</title>
 </head>
 <body>
     <div class="sidebar">
-        <div class="logo">Logo</div>
+        <div class="logo">
+            <img src="SVG/monitor-dashboard.svg" alt="Dashboard">
+            <h3>Dashboard</h3>
+        </div>
         <ul>
-            <li>Home</li>
-            <li>Profile</li>
-            <li>Messages</li>
-            <li>History</li>
-            <li>Tasks</li>
+            <li>
+                <img src="SVG/home-account.svg" alt="Home">
+                <p>Home</p>
+            </li>
+            <li>
+                <img src="SVG/card-account-details.svg" alt="Profile">
+                <p>Profile</p>
+            </li>
+            <li>
+                <img src="SVG/message.svg" alt="Messages">
+                <p>Messages</p>
+            </li>
+            <li>
+                <img src="SVG/history.svg" alt="History">
+                <p>History</p>
+            </li>
+            <li>
+                <img src="SVG/alpha-t-box.svg" alt="Tasks">
+                <p>Tasks</p>
+            </li>
+            <li>
+                <img src="SVG/account-group.svg" alt="Communities">
+                <p>Communities</p>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <img src="SVG/cog.svg" alt="Settings">
+                <p>Settings</p>
+            </li>
+            <li>
+                <img src="SVG/face-agent.svg" alt="Support">
+                <p>Support</p>
+            </li>
+            <li>
+                <img src="SVG/security.svg" alt="Privacy">
+                <p>Privacy</p>
+            </li>
         </ul>
     </div>
     <div class="header">
-        <div>Header</div>
+        <div class="search-container">
+            <img src="SVG/magnify.svg" alt="Search">
+            <input type="text" id="search-bar">
+        </div>
+        <div class="profile-container">
+            <img src="SVG/bell.svg" alt="Bell">
+            <img class="profile-img-small" src="images/gandalf.png" alt="Profile image">
+            <h3>Gandalf</h3>
+        </div>
+        <div class="welcome-container">
+            <img class="profile-img-big" src="images/gandalf.png" alt="Profile image">
+            <div class="welcome-container-text">
+                <p>Hi there,</p>
+                <h3>Gandalf (@gandalf)</h3>
+            </div>
+        </div>
+        <div class="buttons-container">
+            <button>New</button>
+            <button>Upload</button>
+            <button>Share</button>
+        </div>
     </div>
     <div class="main-content">
-        <div>Content</div>
+        <div class="content-heading">
+            <h3>Quotes</h3>
+            <div class="content">
+                <div class="card">
+                    <div class="color"></div>
+                    <div class="card-content">
+                        <h3>Quote 1</h3>
+                        <p>
+                            “Frodo: I wish the Ring had never come to me. I wish none of this had happened.
+                            Gandalf: So do all who live to see such times, but that is not for them to decide. 
+                            All we have to decide is what to do with the time that is given to us.”
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="color"></div>
+                    <div class="card-content">
+                        <h3>Quote 2</h3>
+                        <p>
+                            “It's a dangerous business, Frodo, going out your door. 
+                            You step onto the road, and if you don't keep your feet, there's no knowing where you might be swept off to.”
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="color"></div>
+                    <div class="card-content">
+                        <h3>Quote 3</h3>
+                        <p>
+                            “The Dark Lord has Nine. 
+                            But we have One, mightier than they: the White Rider. 
+                            He has passed through the fire and the abyss, and they shall fear him. We will go where he leads.”
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="color"></div>
+                    <div class="card-content">
+                        <h3>Quote 4</h3>
+                        <p>
+                            “It was Sam's first view of a battle of Men against Men, and he did not like it much. 
+                            He was glad that he could not see the dead face. 
+                            He wondered what the man's name was and where he came from; and if he was really evil of heart, 
+                            or what lies or threats had led him on the long march from his home; and if he would rather have stayed there in peace.”
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="announcements-heading">
+            <h3>Announcements</h3>
+            <div class="announcements">
+                <div class="announcement-content">
+                    <p>
+                        The Battle of Dol Guldur was one of the battles of the north fought between March 28, 3019 to around April 6, 
+                        3019 between the forces of Lórien and Sauron's forces of Dol Guldur, resulted in the end of the evil fortress of Dol Guldur.
+                    </p>
+                </div>
+                <div class="announcement-content">
+                    <p>
+                        The Battle of the Black Gate, or Battle of the Morannon, was the final major battle during the War of the Ring, taking place on March 25, 3019. 
+                        It resulted in the ultimate defeat of Sauron's last host.
+                    </p>
+                </div>
+                <div class="announcement-content">
+                    <p>
+                        The Battle of the Pelennor Fields was a battle for the city of Minas Tirith, 
+                        and ultimately Gondor that took place on March 14 - 15, 3019 between Gondor and their allies and Sauron's forces of Mordor and their allies. 
+                        It was the largest battle of the War of the Ring.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="trending-heading">
+            <h3>Trending</h3>
+            <div class="trending">
+                <div class="trending-content">
+                    <img class="profile-img-small" src="images/gandalf.png" alt="Profile image">
+                    <h3>Aragorn</h3>
+                </div>
+                <div class="trending-content">
+                    <img class="profile-img-small" src="images/gandalf.png" alt="Profile image">
+                    <h3>Frodo</h3>
+                </div>
+                <div class="trending-content">
+                    <img class="profile-img-small" src="images/gandalf.png" alt="Profile image">
+                    <h3>Gimli</h3>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
