@@ -8,12 +8,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="addButton">
-        <button id="add-button">Add Book</button>
-    </div>
-    <div class="content">
-        
-    </div>
+
+    <button id="open-button">Open Form</button>
+
+    <form id="myForm" style="display: none;">
+        <h1>Book</h1>
+        <label for="title"><b>Title</b></label><br>
+        <input type="text" placeholder="Enter Title" name="title" required><br><br>
+
+        <label for="author"><b>Author</b></label><br>
+        <input type="text" placeholder="Enter Author" name="author" required><br><br>
+
+        <label for="pages"><b>Pages</b></label><br>
+        <input type="number" name="pages" required><br><br>
+
+        <label for="checkbox"><b>Did you read it? </b><input type="checkbox" name="checkbox"></label><br><br>
+
+        <button type="submit" id="add-button">Add Book</button><br><br>
+        <button id="close-button">Close</button><br><br>
+    </form>
+    <div class="content"></div>
     <script src="script.js"></script>
 </body>
 </html>
