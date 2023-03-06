@@ -27,8 +27,14 @@ form
     align-items: flex-start;
 }
 
-.removeButton
+.remove-button
 {
     display: flex;
     justify-content: flex-end;
+}
+
+.is-read-button
+{
+    display: flex;
+    justify-content: center;
 }
