@@ -13,11 +13,10 @@ body
 
 .card
 {
-    position: relative;
     background-color: lightgray;
     padding: 10px;
     width: 300px;
-    height: 200px;
+    height: 300px;
 }
 
 form
@@ -37,4 +36,10 @@ form
 {
     display: flex;
     justify-content: center;
+}
+
+.card-content
+{
+    word-wrap: break-word;
+    height: 80%
 }

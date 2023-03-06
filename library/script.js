@@ -10,22 +10,32 @@ function myLibrary(latestBook) {
   removeButton.appendChild(btnRemoveButton);
   book.appendChild(removeButton);
   btnRemoveButton.addEventListener('click', (e) => {
+    const removedTitle = e.target.parentNode.nextElementSibling.innerHTML;
+    for (let i = 0; i < books.length; i++) {
+      if (removedTitle === `Title: ${books[i].title}`) {
+        books.splice(i, 1);
+      }
+    }
     e.target.parentNode.parentNode.parentNode.removeChild(
       e.target.parentNode.parentNode
     );
   });
+  const cardContent = document.createElement('div');
+  cardContent.classList.add('card-content');
   const title = document.createElement('p');
   const textTitle = document.createTextNode(`Title: ${latestBook.title}`);
   title.appendChild(textTitle);
-  book.appendChild(title);
+  cardContent.appendChild(title);
   const author = document.createElement('p');
   const textAuthor = document.createTextNode(`Author: ${latestBook.author}`);
   author.appendChild(textAuthor);
-  book.appendChild(author);
+  cardContent.appendChild(author);
   const pages = document.createElement('p');
   const textPages = document.createTextNode(`Pages: ${latestBook.pages}`);
   pages.appendChild(textPages);
-  book.appendChild(pages);
+  cardContent.appendChild(pages);
+  book.appendChild(cardContent);
+
   const isRead = document.createElement('div');
   isRead.classList.add('is-read-button');
   const btnIsRead = document.createElement('button');
@@ -75,8 +85,8 @@ function addBookToLibrary(formData) {
 
   const theHobbit = new Book(book.title, book.author, book.pages, book.isRead);
   books.push(theHobbit);
-  const latestBook = books[books.length - 1];
-  myLibrary(latestBook);
+  for (let i = 0; i < books.length; i++) myLibrary(books[i]);
+  console.table(books);
 }
 
 function openForm() {
@@ -89,17 +99,44 @@ function closeForm() {
   document.getElementById('open-button').style.display = 'block';
 }
 
+function validateForm() {
+  const title = document.forms.myForm.title.value;
+  const author = document.forms.myForm.author.value;
+  const pages = document.forms.myForm.pages.value;
+  for (let i = 0; i < books.length; i++) {
+    if (title === books[i].title && author === books[i].author) {
+      alert('Replacing already existing book');
+      books.splice(i, 1);
+    }
+  }
+  if (title === '' || author === '' || pages === '') {
+    return false;
+  }
+  console.table(books);
+  return true;
+}
+
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+}
+
 function addEventListenerToButtons() {
   const buttons = document.querySelectorAll('button');
 
   buttons.forEach((button) => {
     button.addEventListener('click', (e) => {
       if (button.id === 'add-button') {
-        const form = document.getElementById('myForm');
-        const formData = new FormData(form);
-        e.preventDefault();
-        addBookToLibrary(formData);
-        closeForm();
+        if (validateForm() === true) {
+          const content = document.querySelector('.content');
+          removeAllChildNodes(content);
+          const form = document.getElementById('myForm');
+          const formData = new FormData(form);
+          e.preventDefault();
+          addBookToLibrary(formData);
+          closeForm();
+        }
       } else if (button.id === 'open-button') openForm();
       else if (button.id === 'close-button') closeForm();
       else return -1;
