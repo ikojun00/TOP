@@ -1,7 +1,9 @@
-.container
+.container, .selection
 {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .content
@@ -13,9 +15,13 @@
     background-color: black;
 }
 
-button
+.container>.content>button
 {
     width: auto;
     height: auto;
     font-size: 80px;
+}
+
+.inactive {
+    display: none;
 }
