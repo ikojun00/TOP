@@ -126,8 +126,6 @@ function optionsButtons() {
 }
 
 function nextToPlay(player1, player2) {
-  console.log(`${player1}-name`);
-  console.log(`${player2}-name`);
   const spanPlayer1Name = document.getElementById(`${player1}-name`);
   spanPlayer1Name.style.color = '';
   const spanPlayer2Name = document.getElementById(`${player2}-name`);
@@ -139,11 +137,11 @@ function boardButtons(players) {
 
   buttons.forEach((button) => {
     button.addEventListener('click', (e) => {
+      const player1 = Player(players.player1);
+      const player2 = Player(players.player2);
+      const spanGameNumber = document.getElementById('game-number');
+      const counterGameNumber = parseInt(spanGameNumber.innerText);
       if (button.className === 'field' && e.target.innerHTML === '') {
-        const player1 = Player(players.player1);
-        const player2 = Player(players.player2);
-        const spanGameNumber = document.getElementById('game-number');
-        const counterGameNumber = parseInt(spanGameNumber.innerText);
         counter.increment();
         if ((counter.value() + counterGameNumber - 1) % 2 !== 0) {
           nextToPlay(player1.getName(), player2.getName());
@@ -151,6 +149,15 @@ function boardButtons(players) {
         } else {
           nextToPlay(player2.getName(), player1.getName());
           player2.move(e, player1, counter.value());
+        }
+      }
+      if (button.id === 'restart') {
+        if (counterGameNumber % 2 !== 0) {
+          nextToPlay(player2.getName(), player1.getName());
+          player2.clearingBoard();
+        } else {
+          nextToPlay(player1.getName(), player2.getName());
+          player1.clearingBoard();
         }
       }
     });
