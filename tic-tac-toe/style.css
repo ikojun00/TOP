@@ -1,4 +1,25 @@
-.container, .selection
+:root 
+{
+    --light: #CBE4DE;
+    --dark: #0E8388;
+    --black: #2E4F4F;
+}
+
+body
+{
+    background-color: var(--dark);
+}
+
+.selection
+{
+    margin-top: 50px;
+    width: fit-content;
+    padding: 0px 50px;
+    border-radius: 0.5rem;
+    background-color: var(--light);
+}
+
+.containers, .container
 {
     display: flex;
     justify-content: center;
@@ -11,8 +32,9 @@
     display: grid;
     grid-template-rows: repeat(3, 100px);
     grid-template-columns: repeat(3, 100px);
-    gap: 10px;
-    background-color: black;
+    gap: 5px;
+    border: none;
+    background-color: var(--dark);
 }
 
 .container>.content>button
@@ -22,6 +44,20 @@
     font-size: 80px;
 }
 
-.inactive {
+.inactive 
+{
     display: none;
+}
+
+#myForm>h2, .playButton
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input
+{
+    border-radius: 0.5rem;
+    border-color: var(--black);
 }
