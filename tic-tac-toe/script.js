@@ -107,7 +107,7 @@ function optionsButtons() {
           const spanPlayer1Name = document.getElementById(`player1-name`);
           spanPlayer1Name.id = `${players.player1}-name`;
           spanPlayer1Name.textContent = `${players.player1} `;
-          spanPlayer1Name.style.color = '#CBE4DE';
+          spanPlayer1Name.style.color = '#0E8388';
 
           const spanPlayer2Name = document.getElementById(`player2-name`);
           spanPlayer2Name.id = `${players.player2}-name`;
@@ -129,7 +129,7 @@ function nextToPlay(player1, player2) {
   const spanPlayer1Name = document.getElementById(`${player1}-name`);
   spanPlayer1Name.style.color = '';
   const spanPlayer2Name = document.getElementById(`${player2}-name`);
-  spanPlayer2Name.style.color = '#CBE4DE';
+  spanPlayer2Name.style.color = '#0E8388';
 }
 
 function boardButtons(players) {

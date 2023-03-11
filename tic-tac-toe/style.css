@@ -8,13 +8,19 @@
 body
 {
     background-color: var(--dark);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.selection
+button
+{
+    font-family: inherit;
+}
+
+.selection, .container
 {
     margin-top: 50px;
     width: fit-content;
-    padding: 0px 50px;
+    padding: 10px 50px;
     border-radius: 0.5rem;
     background-color: var(--light);
 }
@@ -33,7 +39,8 @@ body
     grid-template-rows: repeat(3, 100px);
     grid-template-columns: repeat(3, 100px);
     gap: 5px;
-    border: none;
+    padding: 5px;
+    margin: 10px 0px;
     background-color: var(--dark);
 }
 
@@ -60,4 +67,21 @@ input
 {
     border-radius: 0.5rem;
     border-color: var(--black);
+}
+
+@media only screen and (max-width: 768px) {
+    .selection, .container
+    {
+        padding: 10px 30px;
+    }
+    .content
+    {
+        display: grid;
+        grid-template-rows: repeat(3, 80px);
+        grid-template-columns: repeat(3, 80px);
+        gap: 5px;
+        padding: 5px;
+        margin: 10px 0px;
+        background-color: var(--dark);
+    }
 }
