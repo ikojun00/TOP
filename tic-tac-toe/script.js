@@ -2,26 +2,47 @@ const Player = (name) => {
   const getName = () => name;
   const winner = () => {
     setTimeout(() => {
-      alert(`${name} has won!`);
-      const spanGameWon = document.getElementById(`${name}`);
-      let counterGameWon = parseInt(spanGameWon.innerText);
-      counterGameWon += 1;
-      spanGameWon.textContent = counterGameWon;
+      if (name === 'easy' || name === 'unbeatable') alert(`AI has won!`);
+      else alert(`${name} has won!`);
     }, 100);
+    const spanGameWon = document.getElementById(`${name}`);
+    let counterGameWon = parseInt(spanGameWon.innerText);
+    counterGameWon += 1;
+    spanGameWon.textContent = counterGameWon;
   };
   const clearingBoard = () => {
-    setTimeout(() => {
-      for (let j = 0; j < 3; j += 1) {
-        for (let k = 0; k < 3; k += 1) {
-          board[j][k] = '';
-        }
+    for (let j = 0; j < 3; j += 1) {
+      for (let k = 0; k < 3; k += 1) {
+        board[j][k] = '';
       }
-      const buttons = document.querySelectorAll('button');
-      buttons.forEach((button) => {
-        if (button.className === 'field') button.innerHTML = '';
-      });
-      counter.decrement();
-    }, 100);
+    }
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+      if (button.className === 'field') button.innerHTML = '';
+    });
+    counter.decrement();
+    console.log(counter.value());
+    const players = document.getElementsByName('players');
+    const player1 = players[0].innerText;
+    let player2 = players[1].innerText;
+    if (player2 === ' AI') player2 = ' easy';
+    const spanGameNumber = document.getElementById('game-number');
+    let counterGameNumber = parseInt(spanGameNumber.innerText);
+    counterGameNumber += 1;
+    spanGameNumber.textContent = counterGameNumber;
+    if (counterGameNumber % 2 === 0) {
+      if (name === 'easy' || name === 'unbeatable') ai();
+      nextToPlay(player1.slice(0, -1), player2.slice(1));
+    } else nextToPlay(player2.slice(1), player1.slice(0, -1));
+  };
+  const ai = () => {
+    setTimeout(() => {
+      if (name === 'easy') {
+        easyAI();
+      } else if (name === 'unbeatable') {
+        unbeatableAI();
+      } else console.log('Error');
+    }, 1000);
   };
   const move = (e, enemy, count) => {
     if (count % 2 !== 0) {
@@ -41,29 +62,33 @@ const Player = (name) => {
       ) {
         winner();
         clearingBoard();
-        const players = document.getElementsByName('players');
-        console.log(players);
-        const player1 = players[0].innerText;
-        const player2 = players[1].innerText;
-        const spanGameNumber = document.getElementById('game-number');
-        let counterGameNumber = parseInt(spanGameNumber.innerText);
-        counterGameNumber += 1;
-        spanGameNumber.textContent = counterGameNumber;
-        if (counterGameNumber % 2 === 0) {
-          nextToPlay(player1.slice(0, -1), player2.slice(1));
-        } else nextToPlay(player2.slice(1), player1.slice(0, -1));
         break;
-      }
-    }
-    if (count === 9 && board[0][0] === '')
-      setTimeout(() => {
-        alert(`Tie!`);
+      } else if (count === 9) {
+        setTimeout(() => {
+          alert(`Tie!`);
+        }, 100);
         clearingBoard();
-      }, 100);
-    console.log(`${name} has made a move. ${enemy.getName()} is now.`);
+        break;
+      } else console.log(`${name} has made a move. ${enemy.getName()} is now.`);
+    }
   };
-  return { move, getName, clearingBoard };
+
+  return { move, getName, clearingBoard, ai };
 };
+
+function easyAI() {
+  let i = Math.floor(Math.random() * 3);
+  let j = Math.floor(Math.random() * 3);
+  while (board[i][j] !== '') {
+    i = Math.floor(Math.random() * 3);
+    j = Math.floor(Math.random() * 3);
+  }
+  document.querySelector(`[data-row="${i}"][data-column="${j}"]`).click();
+}
+
+function unbeatableAI() {
+  console.log('in works');
+}
 
 function validateForm() {
   const player1 = document.forms.myForm.player1.value;
@@ -112,6 +137,8 @@ function optionsButtons() {
           const spanPlayer2Name = document.getElementById(`player2-name`);
           spanPlayer2Name.id = `${players.player2}-name`;
           spanPlayer2Name.textContent = ` ${players.player2}`;
+          if (players.player2 === 'easy' || players.player2 === 'unbeatable')
+            spanPlayer2Name.textContent = ' AI';
 
           const spanPlayer1 = document.getElementById('player1-number');
           spanPlayer1.id = `${players.player1}`;
@@ -121,8 +148,42 @@ function optionsButtons() {
           boardButtons(players);
         } else console.log('Error');
       }
+      if (button.id === 'switch') {
+        const textSwitch = document.getElementById(button.id);
+        const parent = document.getElementById('player2');
+        if (textSwitch.innerHTML === 'Switch to Player VS. AI') {
+          while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+          }
+          parent.innerHTML =
+            '<label for="player2"><b>AI</b></label><br>' +
+            '<select name="player2"><option value="easy">Easy</option><option value="unbeatable">Unbeatable</option></select><br><br>';
+          textSwitch.innerHTML = 'Switch to Player VS. Player';
+        } else if (textSwitch.innerHTML === 'Switch to Player VS. Player') {
+          while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+          }
+          parent.innerHTML =
+            '<label for="player2"><b>Player 2</b></label><br>' +
+            '<input type="text" placeholder="Enter name" name="player2" maxlength="50" required><br><br>';
+          textSwitch.innerHTML = 'Switch to Player VS. AI';
+        }
+      }
     });
   });
+}
+
+function restart() {
+  const buttons = document.querySelectorAll('button');
+  for (let j = 0; j < 3; j += 1) {
+    for (let k = 0; k < 3; k += 1) {
+      board[j][k] = '';
+    }
+  }
+  buttons.forEach((btn) => {
+    if (btn.className === 'field') btn.innerHTML = '';
+  });
+  counter.decrement();
 }
 
 function nextToPlay(player1, player2) {
@@ -134,11 +195,11 @@ function nextToPlay(player1, player2) {
 
 function boardButtons(players) {
   const buttons = document.querySelectorAll('button');
+  const player1 = Player(players.player1);
+  const player2 = Player(players.player2);
 
   buttons.forEach((button) => {
     button.addEventListener('click', (e) => {
-      const player1 = Player(players.player1);
-      const player2 = Player(players.player2);
       const spanGameNumber = document.getElementById('game-number');
       const counterGameNumber = parseInt(spanGameNumber.innerText);
       if (button.className === 'field' && e.target.innerHTML === '') {
@@ -146,6 +207,26 @@ function boardButtons(players) {
         if ((counter.value() + counterGameNumber - 1) % 2 !== 0) {
           nextToPlay(player1.getName(), player2.getName());
           player1.move(e, player2, counter.value());
+          const spanPlayer2Name = document.getElementById(
+            `${player2.getName()}-name`
+          );
+          if (
+            (player2.getName() === 'easy' ||
+              player2.getName() === 'unbeatable') &&
+            (counter.value() !== 0 ||
+              spanPlayer2Name.style.color === 'rgb(14, 131, 136)')
+          ) {
+            player2.ai();
+          }
+          if (
+            (player2.getName() === 'easy' ||
+              player2.getName() === 'unbeatable') &&
+            counterGameNumber % 2 === 0 &&
+            counter.value() === 0 &&
+            spanPlayer2Name.style.color === 'rgb(14, 131, 136)'
+          ) {
+            player2.ai();
+          }
         } else {
           nextToPlay(player2.getName(), player1.getName());
           player2.move(e, player1, counter.value());
@@ -154,10 +235,16 @@ function boardButtons(players) {
       if (button.id === 'restart') {
         if (counterGameNumber % 2 !== 0) {
           nextToPlay(player2.getName(), player1.getName());
-          player2.clearingBoard();
+          restart();
         } else {
           nextToPlay(player1.getName(), player2.getName());
-          player1.clearingBoard();
+          if (
+            player2.getName() === 'easy' ||
+            player2.getName() === 'unbeatable'
+          ) {
+            player2.ai();
+          }
+          restart();
         }
       }
     });
@@ -181,6 +268,9 @@ const counter = (function () {
 
     value() {
       return privateCounter;
+    },
+    minusOne() {
+      changeBy(-1);
     },
   };
 })();

@@ -12,16 +12,25 @@
         <div class="selection">
             <form id="myForm">
                 <h2>Tic Tac Toe</h2>
-                <label for="player1"><b>Player 1</b></label><br>
-                <input type="text" placeholder="Enter name" name="player1" maxlength="50" required><br><br>
+                <div id="player1">
+                    <label for="player1"><b>Player 1</b></label><br>
+                    <input type="text" placeholder="Enter name" name="player1" maxlength="50" required><br><br>
+                </div>
         
-                <label for="player2"><b>Player 2</b></label><br>
-                <input type="text" placeholder="Enter name" name="player2" maxlength="50" required><br><br>
+                <div id="player2">
+                    <label for="player2"><b>Player 2</b></label><br>
+                    <input type="text" placeholder="Enter name" name="player2" maxlength="50" required><br><br>
+                </div>
         
-                <div class="playButton">
-                    <button type="submit" id="play-button">Play</button><br><br>
+                <div class="optionsButtons">
+                    <div id="playBtn">
+                        <button type="submit" id="play-button">Play</button><br><br>
+                    </div>
                 </div>
             </form>
+            <div id="switchBtn">
+                <button id="switch">Switch to Player VS. AI</button>
+            </div>
         </div>
         <div class="container inactive">
             <h2>Game <span id="game-number">1</span></h2>

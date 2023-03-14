@@ -51,16 +51,17 @@ button
     font-size: 80px;
 }
 
-.inactive 
+.inactive, #inactive
 {
     display: none;
 }
 
-#myForm>h2, .playButton
+#myForm>h2, .optionsButtons, #switchBtn
 {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 input
