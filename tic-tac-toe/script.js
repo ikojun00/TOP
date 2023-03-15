@@ -69,7 +69,7 @@ const Player = (name) => {
         }, 100);
         clearingBoard();
         break;
-      } else console.log(`${name} has made a move. ${enemy.getName()} is now.`);
+      }
     }
   };
 
@@ -94,6 +94,14 @@ function validateForm() {
   const player1 = document.forms.myForm.player1.value;
   const player2 = document.forms.myForm.player2.value;
   if (player1 === '' || player2 === '') {
+    return false;
+  }
+  const textSwitch = document.getElementById('switch');
+  if (
+    textSwitch.innerHTML === 'Switch to Player VS. AI' &&
+    (player2 === 'easy' || player2 === 'unbeatable')
+  ) {
+    alert('Player2 must change name!');
     return false;
   }
   return true;
