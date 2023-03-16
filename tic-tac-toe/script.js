@@ -3,6 +3,7 @@ const Player = (name) => {
   const winner = () => {
     if (name === 'easy' || name === 'unbeatable') alert(`AI has won!`);
     else alert(`${name} has won!`);
+
     const spanGameWon = document.getElementById(`${name}`);
     let counterGameWon = parseInt(spanGameWon.innerText);
     counterGameWon += 1;
@@ -48,11 +49,11 @@ const Player = (name) => {
       } else console.log('Error');
     }, 800);
   };
-  const move = (e, enemy, count) => {
+  const move = async (e, enemy, count) => {
     if (count % 2 !== 0) {
-      e.target.innerHTML = 'X';
-    } else e.target.innerHTML = 'O';
-    board[e.target.dataset.row][e.target.dataset.column] = e.target.innerHTML;
+      e.target.textContent = 'X';
+    } else e.target.textContent = 'O';
+    board[e.target.dataset.row][e.target.dataset.column] = e.target.textContent;
     console.table(board);
     for (let i = 0; i < 3; i += 1) {
       if (
