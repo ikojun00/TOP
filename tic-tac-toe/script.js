@@ -1,16 +1,14 @@
 const Player = (name) => {
   const getName = () => name;
   const winner = () => {
-    setTimeout(() => {
-      if (name === 'easy' || name === 'unbeatable') alert(`AI has won!`);
-      else alert(`${name} has won!`);
-    }, 100);
+    if (name === 'easy' || name === 'unbeatable') alert(`AI has won!`);
+    else alert(`${name} has won!`);
     const spanGameWon = document.getElementById(`${name}`);
     let counterGameWon = parseInt(spanGameWon.innerText);
     counterGameWon += 1;
     spanGameWon.textContent = counterGameWon;
   };
-  const clearingBoard = () => {
+  const clearingBoard = (enemy) => {
     for (let j = 0; j < 3; j += 1) {
       for (let k = 0; k < 3; k += 1) {
         board[j][k] = '';
@@ -21,11 +19,17 @@ const Player = (name) => {
       if (button.className === 'field') button.innerHTML = '';
     });
     counter.decrement();
-    console.log(counter.value());
     const players = document.getElementsByName('players');
     const player1 = players[0].innerText;
     let player2 = players[1].innerText;
-    if (player2 === ' AI') player2 = ' easy';
+    if (player2 === ' AI' && (name === 'easy' || name === 'unbeatable'))
+      player2 = ` ${name}`;
+    else if (
+      player2 === ' AI' &&
+      (enemy.getName() === 'easy' || enemy.getName() === 'unbeatable')
+    )
+      player2 = ` ${enemy.getName()}`;
+
     const spanGameNumber = document.getElementById('game-number');
     let counterGameNumber = parseInt(spanGameNumber.innerText);
     counterGameNumber += 1;
@@ -42,13 +46,14 @@ const Player = (name) => {
       } else if (name === 'unbeatable') {
         unbeatableAI();
       } else console.log('Error');
-    }, 1000);
+    }, 800);
   };
   const move = (e, enemy, count) => {
     if (count % 2 !== 0) {
       e.target.innerHTML = 'X';
     } else e.target.innerHTML = 'O';
     board[e.target.dataset.row][e.target.dataset.column] = e.target.innerHTML;
+    console.table(board);
     for (let i = 0; i < 3; i += 1) {
       if (
         (board[i][0] === 'X' && board[i][1] === 'X' && board[i][2] === 'X') ||
@@ -61,19 +66,16 @@ const Player = (name) => {
         (board[0][0] === 'O' && board[1][1] === 'O' && board[2][2] === 'O')
       ) {
         winner();
-        clearingBoard();
+        clearingBoard(enemy);
         break;
-      } else if (count === 9) {
-        setTimeout(() => {
-          alert(`Tie!`);
-        }, 100);
-        clearingBoard();
+      } else if (count === 9 && i === 2) {
+        alert(`Tie!`);
+        clearingBoard(enemy);
         break;
       }
     }
   };
-
-  return { move, getName, clearingBoard, ai };
+  return { move, getName, ai };
 };
 
 function easyAI() {
@@ -86,8 +88,129 @@ function easyAI() {
   document.querySelector(`[data-row="${i}"][data-column="${j}"]`).click();
 }
 
+function isMovesLeft() {
+  for (let i = 0; i < 3; i += 1)
+    for (let j = 0; j < 3; j += 1) if (board[i][j] === '') return true;
+
+  return false;
+}
+
+function evaluate(computer, player) {
+  for (let row = 0; row < 3; row += 1) {
+    if (board[row][0] === board[row][1] && board[row][1] === board[row][2]) {
+      if (board[row][0] === computer) return +10;
+
+      if (board[row][0] === player) return -10;
+    }
+  }
+
+  // Checking for Columns for X or O victory.
+  for (let col = 0; col < 3; col += 1) {
+    if (board[0][col] === board[1][col] && board[1][col] === board[2][col]) {
+      if (board[0][col] === computer) return +10;
+
+      if (board[0][col] === player) return -10;
+    }
+  }
+
+  // Checking for Diagonals for X or O victory.
+  if (board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
+    if (board[0][0] === computer) return +10;
+
+    if (board[0][0] === player) return -10;
+  }
+
+  if (board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
+    if (board[0][2] === computer) return +10;
+
+    if (board[0][2] === player) return -10;
+  }
+
+  // Else if none of them have
+  // won then return 0
+  return 0;
+}
+
+function minimax(depth, isMax, computer, player) {
+  const score = evaluate(computer, player);
+
+  if (score === 10) return score;
+
+  if (score === -10) return score;
+
+  if (isMovesLeft(board) === false) return 0;
+
+  if (isMax) {
+    let best = -1000;
+
+    for (let i = 0; i < 3; i += 1) {
+      for (let j = 0; j < 3; j += 1) {
+        if (board[i][j] === '') {
+          board[i][j] = computer;
+
+          best = Math.max(best, minimax(depth + 1, !isMax, computer, player));
+
+          board[i][j] = '';
+        }
+      }
+    }
+    return best;
+  }
+
+  let best = 1000;
+
+  for (let i = 0; i < 3; i += 1) {
+    for (let j = 0; j < 3; j += 1) {
+      if (board[i][j] === '') {
+        board[i][j] = player;
+
+        best = Math.min(best, minimax(depth + 1, !isMax, computer, player));
+
+        board[i][j] = '';
+      }
+    }
+  }
+  return best;
+}
+
 function unbeatableAI() {
-  console.log('in works');
+  let bestVal = -Infinity;
+  let computer = 'X';
+  let player = 'O';
+  function Move(row, col) {
+    this.row = row;
+    this.col = col;
+  }
+  const bestMove = new Move(-1, -1);
+  const spanGameNumber = document.getElementById('game-number');
+  const counterGameNumber = parseInt(spanGameNumber.innerText);
+
+  if (counterGameNumber % 2 !== 0) {
+    computer = 'O';
+    player = 'X';
+  }
+
+  for (let i = 0; i < 3; i += 1) {
+    for (let j = 0; j < 3; j += 1) {
+      if (board[i][j] === '') {
+        board[i][j] = computer;
+        const moveVal = minimax(0, false, computer, player);
+        board[i][j] = '';
+
+        if (moveVal > bestVal) {
+          bestMove.row = i;
+          bestMove.col = j;
+          bestVal = moveVal;
+        }
+      }
+    }
+  }
+
+  document
+    .querySelector(
+      `[data-row="${bestMove.row}"][data-column="${bestMove.col}"]`
+    )
+    .click();
 }
 
 function validateForm() {
@@ -99,7 +222,7 @@ function validateForm() {
   const textSwitch = document.getElementById('switch');
   if (
     textSwitch.innerHTML === 'Switch to Player VS. AI' &&
-    (player2 === 'easy' || player2 === 'unbeatable')
+    (player2 === 'easy' || player2 === 'unbeatable' || player2 === 'AI')
   ) {
     alert('Player2 must change name!');
     return false;
