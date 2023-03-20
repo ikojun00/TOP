@@ -10,9 +10,9 @@ function myLibrary(latestBook) {
   removeButton.appendChild(btnRemoveButton);
   book.appendChild(removeButton);
   btnRemoveButton.addEventListener('click', (e) => {
-    const removedTitle = e.target.parentNode.nextElementSibling.innerHTML;
+    const removedTitle = e.target.parentNode.nextElementSibling.textContent;
     for (let i = 0; i < books.length; i++) {
-      if (removedTitle === `Title: ${books[i].title}`) {
+      if (removedTitle === `Title: ${books[i].title}Author: ${books[i].author}Pages: ${books[i].pages}`) {
         books.splice(i, 1);
       }
     }
@@ -50,53 +50,58 @@ function myLibrary(latestBook) {
   book.appendChild(isRead);
   btnIsRead.addEventListener('click', (e) => {
     if (e.target.innerHTML === 'Not Read') {
+      const book = e.target.parentNode.previousElementSibling.textContent;
+      for (let i = 0; i < books.length; i++) {
+        if (book === `Title: ${books[i].title}Author: ${books[i].author}Pages: ${books[i].pages}`) {
+          books[i].isRead = 'Read';
+        }
+      }
       e.target.innerHTML = 'Read';
       e.target.style.background = 'lightgreen';
     } else if (e.target.innerHTML === 'Read') {
+      const book = e.target.parentNode.previousElementSibling.textContent;
+      for (let i = 0; i < books.length; i++) {
+        if (book === `Title: ${books[i].title}Author: ${books[i].author}Pages: ${books[i].pages}`) {
+          books[i].isRead = 'Not Read';
+        }
+      }
       e.target.innerHTML = 'Not Read';
       e.target.style.background = '#FFCCCB ';
     } else console.log(e.target.innerHTML);
+    console.table(books);
   });
   content.append(book);
 }
 
-function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
-}
-
-function addBookToLibrary(formData) {
-  const book = {
-    title: '',
-    author: '',
-    pages: '',
-    isRead: 'Not Read',
-  };
-
-  for (const [key, value] of formData) {
-    if (key === 'title') book.title = value;
-    else if (key === 'author') book.author = value;
-    else if (key === 'pages') book.pages = value;
-    else if (key === 'checkbox' && value === 'on') book.isRead = 'Read';
-    else console.log('Error');
+class Book
+{
+  constructor(title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
   }
-
-  const theHobbit = new Book(book.title, book.author, book.pages, book.isRead);
-  books.push(theHobbit);
-  for (let i = 0; i < books.length; i++) myLibrary(books[i]);
-  console.table(books);
-}
-
-function openForm() {
-  document.getElementById('myForm').style.display = 'block';
-  document.getElementById('open-button').style.display = 'none';
-}
-
-function closeForm() {
-  document.getElementById('myForm').style.display = 'none';
-  document.getElementById('open-button').style.display = 'block';
+  addBookToLibrary(formData) {
+    const book = {
+      title: '',
+      author: '',
+      pages: '',
+      isRead: 'Not Read',
+    };
+  
+    for (const [key, value] of formData) {
+      if (key === 'title') book.title = value;
+      else if (key === 'author') book.author = value;
+      else if (key === 'pages') book.pages = value;
+      else if (key === 'checkbox' && value === 'on') book.isRead = 'Read';
+      else console.log('Error');
+    }
+  
+    const theHobbit = new Book(book.title, book.author, book.pages, book.isRead);
+    books.push(theHobbit);
+    for (let i = 0; i < books.length; i++) myLibrary(books[i]);
+    console.table(books);
+  }
 }
 
 function validateForm() {
@@ -114,6 +119,16 @@ function validateForm() {
   }
   console.table(books);
   return true;
+}
+
+function openForm() {
+  document.getElementById('myForm').style.display = 'block';
+  document.getElementById('open-button').style.display = 'none';
+}
+
+function closeForm() {
+  document.getElementById('myForm').style.display = 'none';
+  document.getElementById('open-button').style.display = 'block';
 }
 
 function removeAllChildNodes(parent) {
@@ -134,7 +149,7 @@ function addEventListenerToButtons() {
           const form = document.getElementById('myForm');
           const formData = new FormData(form);
           e.preventDefault();
-          addBookToLibrary(formData);
+          new Book().addBookToLibrary(formData);
           closeForm();
         }
       } else if (button.id === 'open-button') openForm();
