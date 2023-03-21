@@ -1,0 +1,119 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root 
+{
+    --light: #CBE4DE;
+    --dark: #0E8388;
+    --black: #2E4F4F;
+}
+
+body
+{
+    background-color: var(--light);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.header
+{
+    background-color: var(--dark);
+}
+
+nav, .restaurant-name
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 1vw;
+}
+
+h1
+{
+    font-size: 4vw;
+}
+
+button
+{
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 1vw;
+}
+
+button:active, .active {
+    text-decoration: underline;
+}
+
+.home, .contact
+{
+    display: grid;
+    place-items: center;
+    padding: 3vw;
+    gap: 1vw;
+    font-size: 1.5vw;
+}
+
+iframe
+{
+    width: 600px;
+    height: 450px;
+    border: 0; 
+}
+
+img
+{
+    width: 20%;
+    height: auto;
+}
+
+.menu
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1vw;
+}
+
+.menu-item
+{
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 1vw;
+    min-height: 50vh;
+}
+
+@media only screen and (max-width: 768px) {
+    h1
+    {
+        font-size: 7vh;
+    }
+
+    nav, .restaurant-name
+    {
+        padding: 3.5vh;
+    }
+    
+    button
+    {
+        font-size: 3vh;
+    }
+
+    .home, .contact
+    {
+        gap: 4vh;
+        padding: 4vh;
+        font-size: 2vh;
+    }
+
+    img
+    {
+        width: 50%;
+    }
+}
