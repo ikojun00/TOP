@@ -1,0 +1,126 @@
+@import "../node_modules/normalize.css/normalize.css";
+
+:root 
+{
+    --header: #D4A373;
+    --sidebar: #FAEDCD;
+    --content: #FEFAE0;
+}
+
+body
+{
+    display: grid;
+    grid-template-rows: 1fr 8fr;
+    grid-template-columns: 1fr 8fr;
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 100vh;
+}
+
+.sidebar
+{
+    background-color: var(--sidebar);
+    grid-row: span 2;
+    padding: 1rem;
+}
+
+.header
+{
+    background-color: var(--header);
+    padding: 1rem 2rem;
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+}
+
+.content
+{
+    background-color: var(--content);
+    padding: 4rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+img
+{
+    width: 30px;
+    height: auto;
+}
+
+.logo>img
+{
+    width: 50px;
+    height: 50px;
+}
+
+.logo
+{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+ul
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+li
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.card
+{
+    background-color: var(--sidebar);
+    border-color: var(--header);
+    border-style: solid;
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+    padding: 1rem;
+}
+
+.card-text
+{
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.card-options
+{
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.header>.add-button
+{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header>.add-button>button, .card>.card-options>button
+{
+    display: flex;
+    flex-direction: row;
+    border-radius: 1rem;
+    background-color: var(--sidebar);
+    align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .card
+    {
+        display: flex;
+        flex-direction: column;
+    }
+}

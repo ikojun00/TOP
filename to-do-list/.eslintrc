@@ -1,3 +1,4 @@
 {
-    "extends": ["wesbos"]
+    "extends": ["wesbos"],
+    "ignorePatterns": ["main.js"]
 }
