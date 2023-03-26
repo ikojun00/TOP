@@ -33,10 +33,7 @@ body
     padding: 1rem 2rem;
     display: grid;
     grid-template-columns: 6fr 1fr;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    
 }
 
 #content
@@ -101,7 +98,14 @@ li
 {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     gap: 1rem;
+}
+
+.card-text>input
+{
+    width: 2rem;
+    height: 2rem;
 }
 
 .card-options
@@ -127,6 +131,23 @@ li
 }
 
 @media only screen and (max-width: 768px) {
+    body
+    {
+        display: grid;
+        grid-template-rows: 1fr 1fr 8fr;
+        font-family: 'Courier New', Courier, monospace;
+        height: 100vh;
+        grid-template-areas: 
+        "header header"
+        "sidebar sidebar"
+        "content content";
+    }
+    ul
+    {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+    }
     .card
     {
         display: flex;
