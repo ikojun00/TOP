@@ -8,19 +8,19 @@
     <title>To Do List</title>
 </head>
 <body>
-    <div class="header">
+    <div id="header">
         <div class="logo">
             <img src="SVG/check-all.svg" alt="Dashboard">
             <h3>To Do List</h3>
         </div>
         <div class="add-button">
-            <button>
+            <button id="add-button">
                 <img src="SVG/plus.svg" alt="Add">
                 <p>Add</p>
             </button>
         </div>
     </div>
-    <div class="sidebar">
+    <div id="sidebar">
         <ul>
             <li>
                 <img src="SVG/inbox.svg" alt="Inbox">
@@ -36,30 +36,7 @@
             </li>
         </ul>
     </div>
-    <div class="content">
-        <div class="card">
-            <div class="card-text">
-                <input type="checkbox" name="my-checkbox" id="opt-in"/>
-                <p>Bla</p>
-            </div>
-            <div class="card-options">
-                <button>Details</button>
-                <img src="SVG/file-edit-outline.svg" alt="File Edit">
-                <img src="SVG/trash-can-outline.svg" alt="Trash">
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-text">
-                <input type="checkbox" name="my-checkbox" id="opt-in"/>
-                <p>Bla</p>
-            </div>
-            <div class="card-options">
-                <button>Details</button>
-                <img src="SVG/file-edit-outline.svg" alt="File Edit">
-                <img src="SVG/trash-can-outline.svg" alt="Trash">
-            </div>
-        </div>
-    </div>
+    <div id="content"></div>
     <script src="main.js"></script>
 </body>
 </html>
