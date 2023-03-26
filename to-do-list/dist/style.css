@@ -13,28 +13,36 @@ body
     grid-template-rows: 1fr 8fr;
     grid-template-columns: 1fr 8fr;
     font-family: 'Courier New', Courier, monospace;
-    min-height: 100vh;
+    height: 100vh;
+    grid-template-areas: 
+    "header header"
+    "sidebar content";
 }
 
 #sidebar
 {
+    grid-area: sidebar;
     background-color: var(--sidebar);
-    grid-row: span 2;
     padding: 1rem;
 }
 
 #header
 {
+    grid-area: header;
     background-color: var(--header);
     padding: 1rem 2rem;
-    grid-column: span 2;
     display: grid;
     grid-template-columns: 6fr 1fr;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 #content
 {
     background-color: var(--content);
+    grid-area: content;
     padding: 4rem 4rem;
     overflow: auto;
     display: flex;
