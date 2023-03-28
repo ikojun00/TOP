@@ -36,6 +36,19 @@
             </li>
         </ul>
     </div>
+    <form id="myForm" style="display: none;">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required></input><br>
+        <label for="title">Description:</label>
+        <textarea type="text" id="desc" name="desc"></textarea><br>
+        <label for="priority">Priority:</label>
+        <select name="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select><br>
+        <button type="submit" id="submit-button">Submit</button><br>
+    </form>
     <div id="content"></div>
     <script src="main.js"></script>
 </body>
