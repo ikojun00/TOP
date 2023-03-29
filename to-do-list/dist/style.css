@@ -125,12 +125,12 @@ li
 {
     display: flex;
     flex-direction: row;
-    border-radius: 1rem;
+    border: none;
     background-color: var(--sidebar);
     align-items: center;
 }
 
-#myForm
+#myForm, .card-details-text
 {
     font-family: 'Courier New', Courier, monospace;
     background-color: var(--sidebar);
