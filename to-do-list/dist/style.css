@@ -130,7 +130,7 @@ li
     align-items: center;
 }
 
-#myForm, .card-details-text
+#myForm, #card-details-text
 {
     font-family: 'Courier New', Courier, monospace;
     background-color: var(--sidebar);

@@ -1,14 +1,8 @@
-function removeAllChildNodes(parent) {
-  while (parent.firstChild) {
-    parent.removeChild(parent.firstChild);
-  }
-}
-
 function openForm(id) {
   document.getElementById(id).style.display = 'flex';
   document.getElementById('add-button').style.display = 'none';
   document
-    .querySelectorAll('body >*:not(#myForm)')
+    .querySelectorAll(`body >*:not(#${id})`)
     .forEach((e) => (e.style.filter = 'blur(10px)'));
 }
 
@@ -22,11 +16,22 @@ function closeForm(id) {
 
 function removeCard(i) {
   cards.splice(i, 1);
-  const card = document.querySelector(`[data-remove='${i}']`);
+  const card = document.querySelector(`[data-remove-button='${i}']`);
   card.parentNode.parentNode.parentNode.removeChild(card.parentNode.parentNode);
 }
 
 function detailsCard(i) {
+  const details = document.getElementById('card-details-text');
+  details.innerHTML = `
+                <p>Title: ${cards[i].title}</p>
+                <p>Description: ${cards[i].desc}</p>
+                <p>Priority: ${cards[i].priority}</p>
+                <button id='details-close-button'>Close</button>`;
+  openForm('card-details-text');
+  const closeDetailsBtn = document.getElementById('details-close-button');
+  closeDetailsBtn.addEventListener('click', () =>
+    closeForm('card-details-text')
+  );
   console.log(cards[i]);
 }
 
@@ -40,14 +45,14 @@ function createCard(card, i) {
                 <p>${card.title}</p>
             </div>
             <div class="card-options">
-                <button id='details-button' data-details=${i}>Details</button>
+                <button id='details-button' data-details-button=${i}>Details</button>
                 <img src="SVG/file-edit-outline.svg" alt="File Edit">
-                <button id='remove-button' data-remove=${i}><img src="SVG/trash-can-outline.svg" alt="Trash"></button>
+                <button id='remove-button' data-remove-button=${i}><img src="SVG/trash-can-outline.svg" alt="Trash"></button>
             </div>`;
   content.appendChild(child);
-  const removeBtn = document.querySelector(`[data-remove='${i}']`);
+  const removeBtn = document.querySelector(`[data-remove-button='${i}']`);
   removeBtn.addEventListener('click', () => removeCard(i));
-  const detailsBtn = document.querySelector(`[data-details='${i}']`);
+  const detailsBtn = document.querySelector(`[data-details-button='${i}']`);
   detailsBtn.addEventListener('click', () => detailsCard(i));
 }
 
@@ -74,11 +79,11 @@ class Card {
 
     const theHobbit = new Card(card.title, card.desc, card.priority);
     cards.push(theHobbit);
-    for (let i = 0; i < cards.length; i += 1) createCard(cards[i], i);
+    createCard(cards[cards.length - 1], cards.length - 1);
     console.table(cards);
   }
 }
 
 const cards = [];
 
-export { openForm, removeAllChildNodes, closeForm, Card };
+export { openForm, closeForm, Card };

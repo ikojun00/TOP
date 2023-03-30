@@ -1,4 +1,4 @@
-import { openForm, removeAllChildNodes, closeForm, Card } from './todos';
+import { openForm, closeForm, Card } from './todos';
 
 function addEventListenerOnButtons() {
   const buttons = document.querySelectorAll('button');
@@ -7,8 +7,6 @@ function addEventListenerOnButtons() {
     button.addEventListener('click', (e) => {
       if (button.id === 'add-button') openForm('myForm');
       else if (button.id === 'submit-button') {
-        const content = document.querySelector('#content');
-        removeAllChildNodes(content);
         const form = document.getElementById('myForm');
         const formData = new FormData(form);
         e.preventDefault();
