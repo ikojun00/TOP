@@ -1,9 +1,8 @@
-import { compareAsc, format } from 'date-fns';
-
-function removeAllChildNodes(parent) {
-  while (parent.firstChild) {
-    parent.removeChild(parent.firstChild);
-  }
+function openContent(id) {
+  document.getElementById(id).style.display = 'grid';
+  document
+    .querySelectorAll(`.content >*:not(#${id})`)
+    .forEach((e) => (e.style.display = 'none'));
 }
 
 function openForm(id) {
@@ -24,8 +23,12 @@ function closeForm(id) {
 
 function removeCard(i) {
   cards.splice(i, 1);
-  const card = document.querySelector(`[data-remove-button='${i}']`);
-  card.parentNode.parentNode.parentNode.removeChild(card.parentNode.parentNode);
+  const card = document.querySelectorAll(`[data-remove-button='${i}']`);
+  card.forEach((element) =>
+    element.parentNode.parentNode.parentNode.removeChild(
+      element.parentNode.parentNode
+    )
+  );
 }
 
 function detailsCard(i) {
@@ -44,11 +47,11 @@ function detailsCard(i) {
   console.log(cards[i]);
 }
 
-function createCard(card, i) {
-  const content = document.getElementById('content');
+function createCard(card, i, id) {
+  const content = document.getElementById(id);
   const child = document.createElement('div');
   child.classList.add('card');
-  child.innerHTML += `
+  child.innerHTML = `
             <div class="card-text">
                 <input type="checkbox" name="my-checkbox" id="opt-in"/>
                 <p>${card.title}</p>
@@ -70,6 +73,34 @@ function createCard(card, i) {
 function editCard(i) {
   removeCard(i);
   openForm('myForm');
+}
+
+function isToday(date) {
+  const otherDate = new Date(date);
+  const todayDate = new Date();
+
+  if (
+    otherDate.getDate() === todayDate.getDate() &&
+    otherDate.getMonth() === todayDate.getMonth() &&
+    otherDate.getYear() === todayDate.getYear()
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function isThisWeek(date) {
+  const otherDate = new Date(date);
+  const todayObj = new Date();
+  const todayDate = todayObj.getDate();
+  const todayDay = todayObj.getDay();
+
+  const firstDayOfWeek = new Date(todayObj.setDate(todayDate - todayDay));
+
+  const lastDayOfWeek = new Date(firstDayOfWeek);
+  lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
+
+  return otherDate >= firstDayOfWeek && otherDate <= lastDayOfWeek;
 }
 
 class Card {
@@ -96,15 +127,17 @@ class Card {
       else console.log('Error');
     }
 
-    card.date = format(new Date(card.date), 'dd-MM-yyyy');
-    console.log(card.date);
     const theHobbit = new Card(card.title, card.desc, card.priority, card.date);
     cards.push(theHobbit);
-    for (let i = 0; i < cards.length; i += 1) createCard(cards[i], i);
+    if (isToday(card.date))
+      createCard(theHobbit, cards.length - 1, 'content-today');
+    if (isThisWeek(card.date))
+      createCard(theHobbit, cards.length - 1, 'content-week');
+    createCard(theHobbit, cards.length - 1, 'content-inbox');
     console.table(cards);
   }
 }
 
 const cards = [];
 
-export { removeAllChildNodes, openForm, closeForm, Card };
+export { openForm, closeForm, Card, openContent };

@@ -36,12 +36,16 @@ body
     
 }
 
-#content
+.content
 {
     background-color: var(--content);
     grid-area: content;
     padding: 4rem 4rem;
     overflow: auto;
+}
+
+div[id^=content]
+{
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -81,7 +85,6 @@ li
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 1rem;
 }
 
 .card
@@ -121,13 +124,14 @@ li
     justify-content: flex-end;
 }
 
-#header>.add-button>button, .card>.card-options>button
+#header>.add-button>button, .card>.card-options>button, #sidebar>ul>li>button
 {
     display: flex;
     flex-direction: row;
     border: none;
     background-color: var(--sidebar);
     align-items: center;
+    gap: 0.5rem;
 }
 
 #myForm, #card-details-text

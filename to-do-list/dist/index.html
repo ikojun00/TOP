@@ -23,16 +23,13 @@
     <div id="sidebar">
         <ul>
             <li>
-                <img src="SVG/inbox.svg" alt="Inbox">
-                <p>Inbox</p>
+                <button id="inbox-button"><img src="SVG/inbox.svg" alt="Inbox"><p>Inbox</p></button>
             </li>
             <li>
-                <img src="SVG/calendar-today.svg" alt="Today">
-                <p>Today</p>
+                <button id="today-button"><img src="SVG/calendar-today.svg" alt="Today"><p>Today</p></button>
             </li>
             <li>
-                <img src="SVG/calendar-week.svg" alt="Week">
-                <p>Week</p>
+                <button id="week-button"><img src="SVG/calendar-week.svg" alt="Week"><p>Week</p></button>
             </li>
         </ul>
     </div>
@@ -42,7 +39,7 @@
         <label for="title">Description:</label>
         <textarea type="text" id="desc" name="desc"></textarea><br>
         <label for="date">Due date:</label>
-        <input type="date" id="date" name="date"><br>
+        <input type="date" id="date" name="date" required><br>
         <label for="priority">Priority:</label>
         <select name="priority">
             <option value="Low">Low</option>
@@ -52,7 +49,11 @@
         <button type="submit" id="submit-button">Submit</button><br>
     </form>
     <div id="card-details-text" style="display: none;"></div>
-    <div id="content"></div>
+    <div class="content">
+        <div id="content-inbox" style="display: grid"></div>
+        <div id="content-today" style="display: none;"></div>
+        <div id="content-week" style="display: none;"></div>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>
