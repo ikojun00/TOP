@@ -94,7 +94,7 @@ li
     border-style: solid;
     display: grid;
     grid-template-columns: 6fr 1fr;
-    padding: 1rem;
+    padding: 0 1rem;
 }
 
 .card-text
@@ -102,20 +102,20 @@ li
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .card-text>input
 {
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 .card-options
 {
     display: flex;
     justify-content: flex-end;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 #header>.add-button
@@ -174,5 +174,9 @@ li
     {
         display: flex;
         flex-direction: column;
+    }
+    .card-text, .card-options
+    {
+        gap: 1rem;
     }
 }

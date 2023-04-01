@@ -47,21 +47,33 @@ function detailsCard(i) {
   console.log(cards[i]);
 }
 
+function isCheckboxChecked() {
+  if (this.checked) {
+    console.log('Checkbox is checked..');
+  } else {
+    console.log('Checkbox is not checked..');
+  }
+}
+
 function createCard(card, i, id) {
   const content = document.getElementById(id);
   const child = document.createElement('div');
   child.classList.add('card');
   child.innerHTML = `
             <div class="card-text">
-                <input type="checkbox" name="my-checkbox" id="opt-in"/>
+                <input type="checkbox" name="checkbox" id="opt-in" data-checkbox=${i}/>
                 <p>${card.title}</p>
             </div>
             <div class="card-options">
                 <button id='details-button' data-details-button=${i}>Details</button>
+                <p>${card.date}</p>
                 <button id='edit-button' data-edit-button=${i}><img src="SVG/file-edit-outline.svg" alt="File Edit"></button>
                 <button id='remove-button' data-remove-button=${i}><img src="SVG/trash-can-outline.svg" alt="Trash"></button>
             </div>`;
   content.appendChild(child);
+
+  const checkbox = document.querySelector('input[name=checkbox]');
+  checkbox.addEventListener('change', () => isCheckboxChecked());
   const removeBtn = document.querySelector(`[data-remove-button='${i}']`);
   removeBtn.addEventListener('click', () => removeCard(i));
   const editBtn = document.querySelector(`[data-edit-button='${i}']`);
