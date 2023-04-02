@@ -105,10 +105,11 @@ li
     gap: 2rem;
 }
 
-.card-text>input
+.card-text>#checkbox-button
 {
     width: 1.5rem;
     height: 1.5rem;
+    border-radius: 50%;
 }
 
 .card-options
@@ -124,7 +125,7 @@ li
     justify-content: flex-end;
 }
 
-#header>.add-button>button, .card>.card-options>button, #sidebar>ul>li>button
+#header>.add-button>button, .card>.card-options>button, .card>.card-options>p, #sidebar>ul>li>button
 {
     display: flex;
     flex-direction: row;
@@ -132,6 +133,7 @@ li
     background-color: var(--sidebar);
     align-items: center;
     gap: 0.5rem;
+    padding: 0 0.5rem;
 }
 
 #myForm, #card-details-text
@@ -146,8 +148,10 @@ li
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    max-width: 50%;
     display: flex;
     flex-direction: column;
+    overflow-wrap: break-word;
     gap: 1rem;
     
 }
@@ -174,9 +178,14 @@ li
     {
         display: flex;
         flex-direction: column;
+        padding: 0;
     }
-    .card-text, .card-options
+    .card-text
     {
-        gap: 1rem;
+        padding: 0 1rem;
+    }
+    .card-options
+    {
+        gap: 0;
     }
 }

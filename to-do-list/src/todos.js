@@ -5,6 +5,18 @@ function openContent(id) {
     .forEach((e) => (e.style.display = 'none'));
 }
 
+function higlightOpenContent(id) {
+  const myDiv = document.getElementById('sidebar');
+  document.getElementById(id).style.backgroundColor = '#D4A373';
+  document.getElementById(`${id}-button`).style.backgroundColor = '#D4A373';
+  myDiv
+    .querySelectorAll(`ul>*:not(#${id})`)
+    .forEach((e) => (e.style.backgroundColor = '#FAEDCD'));
+  myDiv
+    .querySelectorAll(`li>*:not(#${id}-button)`)
+    .forEach((e) => (e.style.backgroundColor = '#FAEDCD'));
+}
+
 function openForm(id) {
   document.getElementById(id).style.display = 'flex';
   document.getElementById('add-button').style.display = 'none';
@@ -47,12 +59,19 @@ function detailsCard(i) {
   console.log(cards[i]);
 }
 
-function isCheckboxChecked() {
-  if (this.checked) {
-    console.log('Checkbox is checked..');
-  } else {
-    console.log('Checkbox is not checked..');
-  }
+function isCheckedCard(i) {
+  const checkboxBtn = document.querySelectorAll(
+    `[data-checkbox-button='${i}']`
+  );
+  checkboxBtn.forEach((element) => {
+    if (element.style.backgroundColor !== 'rgb(212, 163, 115)') {
+      element.style.backgroundColor = 'rgb(212, 163, 115)';
+      element.nextElementSibling.style.textDecoration = 'line-through';
+    } else {
+      element.style.backgroundColor = 'white';
+      element.nextElementSibling.style.textDecoration = 'none';
+    }
+  });
 }
 
 function createCard(card, i, id) {
@@ -61,8 +80,8 @@ function createCard(card, i, id) {
   child.classList.add('card');
   child.innerHTML = `
             <div class="card-text">
-                <input type="checkbox" name="checkbox" id="opt-in" data-checkbox=${i}/>
-                <p>${card.title}</p>
+              <button id='checkbox-button' data-checkbox-button=${i}></button>
+              <p>${card.title}</p>
             </div>
             <div class="card-options">
                 <button id='details-button' data-details-button=${i}>Details</button>
@@ -72,8 +91,8 @@ function createCard(card, i, id) {
             </div>`;
   content.appendChild(child);
 
-  const checkbox = document.querySelector('input[name=checkbox]');
-  checkbox.addEventListener('change', () => isCheckboxChecked());
+  const checkboxBtn = document.querySelector(`[data-checkbox-button='${i}']`);
+  checkboxBtn.addEventListener('click', () => isCheckedCard(i));
   const removeBtn = document.querySelector(`[data-remove-button='${i}']`);
   removeBtn.addEventListener('click', () => removeCard(i));
   const editBtn = document.querySelector(`[data-edit-button='${i}']`);
@@ -152,4 +171,4 @@ class Card {
 
 const cards = [];
 
-export { openForm, closeForm, Card, openContent };
+export { openForm, closeForm, Card, openContent, higlightOpenContent };

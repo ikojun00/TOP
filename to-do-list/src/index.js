@@ -1,4 +1,10 @@
-import { openForm, closeForm, Card, openContent } from './todos';
+import {
+  openForm,
+  closeForm,
+  Card,
+  openContent,
+  higlightOpenContent,
+} from './todos';
 
 function addEventListenerOnButtons() {
   const buttons = document.querySelectorAll('button');
@@ -12,10 +18,16 @@ function addEventListenerOnButtons() {
         e.preventDefault();
         new Card().addCardToContent(formData);
         closeForm('myForm');
-      } else if (button.id === 'inbox-button') openContent('content-inbox');
-      else if (button.id === 'today-button') openContent('content-today');
-      else if (button.id === 'week-button') openContent('content-week');
-      else console.log('Error');
+      } else if (button.id === 'inbox-button') {
+        openContent('content-inbox');
+        higlightOpenContent('inbox');
+      } else if (button.id === 'today-button') {
+        openContent('content-today');
+        higlightOpenContent('today');
+      } else if (button.id === 'week-button') {
+        openContent('content-week');
+        higlightOpenContent('week');
+      } else console.log('Error');
     });
   });
 }
