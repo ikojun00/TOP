@@ -71,6 +71,7 @@ function isCheckedCard(i) {
       element.style.backgroundColor = 'white';
       element.nextElementSibling.style.textDecoration = 'none';
     }
+    console.log(element);
   });
 }
 
@@ -86,24 +87,9 @@ function createCard(card, i, id) {
             <div class="card-options">
                 <button id='details-button' data-details-button=${i}>Details</button>
                 <p>${card.date}</p>
-                <button id='edit-button' data-edit-button=${i}><img src="SVG/file-edit-outline.svg" alt="File Edit"></button>
                 <button id='remove-button' data-remove-button=${i}><img src="SVG/trash-can-outline.svg" alt="Trash"></button>
             </div>`;
   content.appendChild(child);
-
-  const checkboxBtn = document.querySelector(`[data-checkbox-button='${i}']`);
-  checkboxBtn.addEventListener('click', () => isCheckedCard(i));
-  const removeBtn = document.querySelector(`[data-remove-button='${i}']`);
-  removeBtn.addEventListener('click', () => removeCard(i));
-  const editBtn = document.querySelector(`[data-edit-button='${i}']`);
-  editBtn.addEventListener('click', () => editCard(i));
-  const detailsBtn = document.querySelector(`[data-details-button='${i}']`);
-  detailsBtn.addEventListener('click', () => detailsCard(i));
-}
-
-function editCard(i) {
-  removeCard(i);
-  openForm('myForm');
 }
 
 function isToday(date) {
@@ -126,12 +112,29 @@ function isThisWeek(date) {
   const todayDate = todayObj.getDate();
   const todayDay = todayObj.getDay();
 
-  const firstDayOfWeek = new Date(todayObj.setDate(todayDate - todayDay));
+  const firstDayOfWeek = new Date(todayObj.setDate(todayDate - todayDay - 1));
 
   const lastDayOfWeek = new Date(firstDayOfWeek);
-  lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
+  lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 7);
 
   return otherDate >= firstDayOfWeek && otherDate <= lastDayOfWeek;
+}
+
+function addEventListenerOnCardButtons(i) {
+  const checkboxBtn = document.querySelectorAll(
+    `[data-checkbox-button='${i}']`
+  );
+  checkboxBtn.forEach((element) =>
+    element.addEventListener('click', () => isCheckedCard(i))
+  );
+  const removeBtn = document.querySelectorAll(`[data-remove-button='${i}']`);
+  removeBtn.forEach((element) =>
+    element.addEventListener('click', () => removeCard(i))
+  );
+  const detailsBtn = document.querySelectorAll(`[data-details-button='${i}']`);
+  detailsBtn.forEach((element) =>
+    element.addEventListener('click', () => detailsCard(i))
+  );
 }
 
 class Card {
@@ -165,6 +168,7 @@ class Card {
     if (isThisWeek(card.date))
       createCard(theHobbit, cards.length - 1, 'content-week');
     createCard(theHobbit, cards.length - 1, 'content-inbox');
+    addEventListenerOnCardButtons(cards.length - 1);
     console.table(cards);
   }
 }

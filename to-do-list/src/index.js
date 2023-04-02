@@ -6,6 +6,15 @@ import {
   higlightOpenContent,
 } from './todos';
 
+function validateForm() {
+  const title = document.forms.myForm.title.value;
+  const date = document.forms.myForm.date.value;
+  if (title === '' || date === '') {
+    return false;
+  }
+  return true;
+}
+
 function addEventListenerOnButtons() {
   const buttons = document.querySelectorAll('button');
 
@@ -13,11 +22,13 @@ function addEventListenerOnButtons() {
     button.addEventListener('click', (e) => {
       if (button.id === 'add-button') openForm('myForm');
       else if (button.id === 'submit-button') {
-        const form = document.getElementById('myForm');
-        const formData = new FormData(form);
-        e.preventDefault();
-        new Card().addCardToContent(formData);
-        closeForm('myForm');
+        if (validateForm() === true) {
+          const form = document.getElementById('myForm');
+          const formData = new FormData(form);
+          e.preventDefault();
+          new Card().addCardToContent(formData);
+          closeForm('myForm');
+        }
       } else if (button.id === 'inbox-button') {
         openContent('content-inbox');
         higlightOpenContent('inbox');
