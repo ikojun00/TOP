@@ -33,13 +33,9 @@ function closeForm(id) {
     .forEach((e) => (e.style.filter = 'blur(0)'));
 }
 
-// fix
 function removeCard(i) {
-  const storage = JSON.parse(localStorage.getItem('cards'));
-  console.log(cards);
-  storage.slice(i, 1);
-  localStorage.setItem('cards', JSON.stringify(storage));
   cards.splice(i, 1);
+  localStorage.setItem('cards', JSON.stringify(cards));
   const card = document.querySelectorAll(`[data-remove-button='${i}']`);
   card.forEach((element) =>
     element.parentNode.parentNode.parentNode.removeChild(
@@ -166,28 +162,29 @@ class Card {
 
     const theHobbit = new Card(card.title, card.desc, card.priority, card.date);
     cards.push(theHobbit);
-    addToLocalStorage(theHobbit);
+    localStorage.setItem('cards', JSON.stringify(cards));
+    addToLocalStorage(theHobbit, cards.length - 1);
     console.table(cards);
   }
 }
 
 let cards = [];
 
-function addToLocalStorage(card) {
-  localStorage.setItem('cards', JSON.stringify(cards));
-  if (isToday(card.date)) createCard(card, cards.length - 1, 'content-today');
-  if (isThisWeek(card.date)) createCard(card, cards.length - 1, 'content-week');
-  createCard(card, cards.length - 1, 'content-inbox');
-  addEventListenerOnCardButtons(cards.length - 1);
+function addToLocalStorage(card, i) {
+  if (isToday(card.date)) createCard(card, i, 'content-today');
+  if (isThisWeek(card.date)) createCard(card, i, 'content-week');
+  createCard(card, i, 'content-inbox');
+  addEventListenerOnCardButtons(i);
 }
 
 function getFromLocalStorage() {
+  let counter = 0;
   const reference = localStorage.getItem('cards');
-  console.log(reference);
   if (reference) {
     cards = JSON.parse(reference);
     cards.forEach((card) => {
-      addToLocalStorage(card);
+      addToLocalStorage(card, counter);
+      counter += 1;
     });
   }
 }

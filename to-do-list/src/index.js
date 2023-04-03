@@ -38,7 +38,7 @@ function addEventListenerOnButtons() {
       } else if (button.id === 'week-button') {
         openContent('content-week');
         higlightOpenContent('week');
-      } else console.log('Error');
+      }
     });
   });
 }
