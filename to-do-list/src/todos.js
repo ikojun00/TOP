@@ -136,37 +136,26 @@ function addEventListenerOnCardButtons(i) {
   );
 }
 
-class Card {
-  constructor(title, desc, priority, date) {
-    this.title = title;
-    this.desc = desc;
-    this.priority = priority;
-    this.date = date;
+const Card = (formData) => {
+  const card = {
+    title: '',
+    desc: '',
+    priority: '',
+    date: '',
+  };
+
+  for (const [key, value] of formData) {
+    if (key === 'title') card.title = value;
+    else if (key === 'desc') card.desc = value;
+    else if (key === 'priority') card.priority = value;
+    else if (key === 'date') card.date = value;
+    else console.log('Error');
   }
-
-  addCardToContent(formData) {
-    const card = {
-      title: '',
-      desc: '',
-      priority: '',
-      date: '',
-    };
-
-    for (const [key, value] of formData) {
-      if (key === 'title') card.title = value;
-      else if (key === 'desc') card.desc = value;
-      else if (key === 'priority') card.priority = value;
-      else if (key === 'date') card.date = value;
-      else console.log('Error');
-    }
-
-    const theHobbit = new Card(card.title, card.desc, card.priority, card.date);
-    cards.push(theHobbit);
-    localStorage.setItem('cards', JSON.stringify(cards));
-    addToLocalStorage(theHobbit, cards.length - 1);
-    console.table(cards);
-  }
-}
+  cards.push(card);
+  localStorage.setItem('cards', JSON.stringify(cards));
+  addToLocalStorage(card, cards.length - 1);
+  return { card };
+};
 
 let cards = [];
 

@@ -26,7 +26,7 @@ function addEventListenerOnButtons() {
           const form = document.getElementById('myForm');
           const formData = new FormData(form);
           e.preventDefault();
-          new Card().addCardToContent(formData);
+          Card(formData);
           closeForm('myForm');
         }
       } else if (button.id === 'inbox-button') {
