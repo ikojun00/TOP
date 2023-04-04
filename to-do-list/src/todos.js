@@ -63,18 +63,20 @@ function isCheckedCard(i) {
   const checkboxBtn = document.querySelectorAll(
     `[data-checkbox-button='${i}']`
   );
-  checkboxBtn.forEach((element) => {
-    if (element.style.backgroundColor !== 'rgb(212, 163, 115)') {
-      element.style.backgroundColor = 'rgb(212, 163, 115)';
-      element.nextElementSibling.style.textDecoration = 'line-through';
-    } else {
+  if (cards[i].done === false) {
+    checkboxBtn.forEach((element) => {
       element.style.backgroundColor = 'white';
       element.nextElementSibling.style.textDecoration = 'none';
-    }
-  });
+    });
+  } else {
+    checkboxBtn.forEach((element) => {
+      element.style.backgroundColor = 'rgb(212, 163, 115)';
+      element.nextElementSibling.style.textDecoration = 'line-through';
+    });
+  }
 }
 
-function createCard(card, i, id) {
+function createCardDOM(card, i, id) {
   const content = document.getElementById(id);
   const child = document.createElement('div');
   child.classList.add('card');
@@ -124,7 +126,12 @@ function addEventListenerOnCardButtons(i) {
     `[data-checkbox-button='${i}']`
   );
   checkboxBtn.forEach((element) =>
-    element.addEventListener('click', () => isCheckedCard(i))
+    element.addEventListener('click', () => {
+      if (cards[i].done === true) cards[i].done = false;
+      else cards[i].done = true;
+      isCheckedCard(i);
+      localStorage.setItem('cards', JSON.stringify(cards));
+    })
   );
   const removeBtn = document.querySelectorAll(`[data-remove-button='${i}']`);
   removeBtn.forEach((element) =>
@@ -142,6 +149,7 @@ const Card = (formData) => {
     desc: '',
     priority: '',
     date: '',
+    done: false,
   };
 
   for (const [key, value] of formData) {
@@ -153,16 +161,16 @@ const Card = (formData) => {
   }
   cards.push(card);
   localStorage.setItem('cards', JSON.stringify(cards));
-  addToLocalStorage(card, cards.length - 1);
+  createCard(card, cards.length - 1);
   return { card };
 };
 
 let cards = [];
 
-function addToLocalStorage(card, i) {
-  if (isToday(card.date)) createCard(card, i, 'content-today');
-  if (isThisWeek(card.date)) createCard(card, i, 'content-week');
-  createCard(card, i, 'content-inbox');
+function createCard(card, i) {
+  if (isToday(card.date)) createCardDOM(card, i, 'content-today');
+  if (isThisWeek(card.date)) createCardDOM(card, i, 'content-week');
+  createCardDOM(card, i, 'content-inbox');
   addEventListenerOnCardButtons(i);
 }
 
@@ -172,7 +180,8 @@ function getFromLocalStorage() {
   if (reference) {
     cards = JSON.parse(reference);
     cards.forEach((card) => {
-      addToLocalStorage(card, counter);
+      createCard(card, counter);
+      isCheckedCard(counter);
       counter += 1;
     });
   }
