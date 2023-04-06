@@ -105,15 +105,17 @@ class Book
 }
 
 function validateForm() {
+  const titleId = document.getElementById("title");
   const title = document.forms.myForm.title.value;
   const author = document.forms.myForm.author.value;
   const pages = document.forms.myForm.pages.value;
   for (let i = 0; i < books.length; i++) {
     if (title === books[i].title && author === books[i].author) {
-      alert('Replacing already existing book');
-      books.splice(i, 1);
+      titleId.setCustomValidity("You already have this book in the library.");
+      return;
     }
   }
+  titleId.setCustomValidity("");
   if (title === '' || author === '' || pages === '') {
     return false;
   }
