@@ -49,7 +49,7 @@ const Player = (name) => {
       } else console.log('Error');
     }, 800);
   };
-  const move = async (e, enemy, count) => {
+  const move = (e, enemy, count) => {
     if (count % 2 !== 0) {
       e.target.textContent = 'X';
     } else e.target.textContent = 'O';
