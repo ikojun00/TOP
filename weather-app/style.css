@@ -1,8 +1,47 @@
 @import "normalize.css/normalize.css";
 
+:root 
+{
+    --header: #D4A373;
+    --sidebar: #FAEDCD;
+    --content: #FEFAE0;
+}
+
+body
+{
+    background-color: var(--sidebar);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 header
+{
+    background-color: var(--header);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main
 {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10vh;
+}
+
+img
+{
+    width: 30px;
+    height: 30px;
+}
+
+#content
+{
+    width: auto;
+    height: auto;
+    border-style: solid;
+    background-color: var(--content);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
