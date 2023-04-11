@@ -16,9 +16,28 @@ body
 header
 {
     background-color: var(--header);
+    padding: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+input
+{
+    height: 2rem;
+    width: auto;
+}
+
+button
+{
+    background-color: var(--sidebar);
+    border: none;
+}
+
+#search-button
+{
+    height: auto;
+    width: auto;
 }
 
 #main
@@ -26,22 +45,44 @@ header
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10vh;
+    padding: 2rem;
 }
 
-img
+img>#condition-icon
 {
-    width: 30px;
-    height: 30px;
+    width: 1rem;
+    height: auto;
 }
 
 #content
 {
     width: auto;
     height: auto;
+    padding: 1rem;
     border-style: solid;
+    border-color: var(--header);
     background-color: var(--content);
     display: flex;
+    flex-direction: column;
+}
+
+#current
+{
+    display: flex;
+    flex-direction: row;
+    gap: 4rem;
+}
+
+#current>#condition
+{
+    display: flex;
     align-items: center;
+    flex-direction: column;
+}
+
+#current>#stats
+{
+    display: flex;
+    align-items: flex-end;
     flex-direction: column;
 }
