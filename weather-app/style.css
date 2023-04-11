@@ -26,6 +26,8 @@ input
 {
     height: 2rem;
     width: auto;
+    border: none;
+    outline: none;
 }
 
 button
@@ -38,6 +40,7 @@ button
 {
     height: auto;
     width: auto;
+    background-color: white;
 }
 
 #main

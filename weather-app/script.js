@@ -31,19 +31,15 @@ async function getWeather(city) {
   }
 }
 
-function addEventListenerOnButtons() {
-  const buttons = document.querySelectorAll('button');
-
-  buttons.forEach((button) => {
-    button.addEventListener('click', (e) => {
-      if (button.id === 'search-button') {
-        const city = document.getElementById('search-bar').value;
-        if (city === '') return false;
-        e.preventDefault();
-        getWeather(city);
-      }
-    });
-  });
+function submitValue() {
+  document.getElementById('search-bar').onkeydown = function (e) {
+    if (e.key === 'Enter') {
+      const city = document.getElementById('search-bar').value;
+      if (city === '') return false;
+      e.preventDefault();
+      getWeather(city);
+    }
+  };
 }
 
-addEventListenerOnButtons();
+submitValue();
