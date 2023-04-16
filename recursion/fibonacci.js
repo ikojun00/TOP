@@ -16,5 +16,5 @@ function fibsRec(n, array = [0, 1])
     if((array.length >= n)) return array;
     return fibsRec(n, array.concat([array[array.length - 2] + array[array.length - 1]]));
 }
-
+            
 console.log(fibsRec(8));
