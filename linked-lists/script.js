@@ -78,20 +78,46 @@ const LinkedList = () => {
         }
         return result;
     };
-    return { append, prepend, size, firstElement, lastElement, indexOf, pop, find, toString };
+    const insertAt = (element, position) => {
+        let currentNode = head;
+        let i = 0;
+        while (currentNode) {
+            if (i === position - 1) {
+                const newNode = Node(element, currentNode.next);
+                currentNode.next = newNode;
+            }
+            currentNode = currentNode.next;
+            i += 1;
+        }
+        
+        length++;
+    }
+    const removeAt = (position) => {
+        const isPositionInTheRange = position > -1 && position < length;
+  
+        if(!isPositionInTheRange){
+            return null;
+        }
+        
+        let currentNode = head;
+        
+        if(position === 0){
+            head = currentNode.next;
+        } 
+        else {
+            let index = 0;
+            let previousNode = null;
+            
+            while(index++ < position){
+                previousNode = currentNode;
+                currentNode = currentNode.next
+            }
+            
+            previousNode.next = currentNode.next;
+        }
+        
+        length--;
+        return currentNode.element;
+    }
+    return { append, prepend, size, firstElement, lastElement, indexOf, pop, find, toString, insertAt, removeAt };
 }
-
-const list = LinkedList();
-list.append(8);
-list.append(12);
-list.prepend(9);
-list.prepend(4);
-list.append(16);
-console.log(list.toString());
-list.pop();
-console.log(list.toString());
-console.log(list.size());
-console.log(list.firstElement());
-console.log(list.lastElement());
-console.log(list.indexOf(1));
-console.log(list.find(8));
