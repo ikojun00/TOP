@@ -47,7 +47,6 @@ const BinarySearchTree = (array) => {
             }
             insert(value, position.right);
         }
-        console.log(position);
         return position;
     };
     const remove = (value, position = root()) => {
@@ -74,7 +73,30 @@ const BinarySearchTree = (array) => {
         }
         return position;
     };
-    return { root, prettyPrint, insert, remove };
+    const find = (value, position = root()) => {
+        if (position === null) return -1;
+        if (value === position.element) return position;
+
+        if (value < position.element) return find(value, position.left);
+        else if (value > position.element) return find(value, position.right);
+    
+    };
+    const levelOrder = (arr = [], queue = [], position = root()) => {
+        if (position === null) return;
+        arr.push(position.element);
+        queue.push(position.left);
+        queue.push(position.right);
+
+        while (queue.length) {
+            const level = queue[0];
+            queue.shift();
+            levelOrder(arr, queue, level)
+        }
+
+        return arr;
+    };
+    
+    return { root, prettyPrint, insert, remove, find, levelOrder };
 }
 
 let array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
@@ -83,3 +105,5 @@ const root = tree.root();
 tree.prettyPrint(root);
 tree.prettyPrint(tree.insert(2));
 tree.prettyPrint(tree.remove(4));
+console.log(tree.find(6345));
+console.log(tree.levelOrder());
