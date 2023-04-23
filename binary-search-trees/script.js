@@ -3,20 +3,20 @@ function Node(element = null, left = null, right = null)
     return {element, left, right};
 }
 
-function BuildTree(array, start = 0, end = array.length - 1) {
+function buildTree(array, start = 0, end = array.length - 1) {
     if (start > end) return null;
 
     const middle = Math.floor((start + end) / 2);
     const root = Node(array[middle]);
-    root.left = BuildTree(array, start, middle - 1);
-    root.right = BuildTree(array, middle + 1, end);
+    root.left = buildTree(array, start, middle - 1);
+    root.right = buildTree(array, middle + 1, end);
     return root;
 }
 
 const BinarySearchTree = (array) => {
     array = [...new Set(array.sort((a, b) => (a < b ? -1 : 1)))];
 
-    const root = () =>  BuildTree(array);
+    const root = () =>  buildTree(array);
     const prettyPrint = (node, prefix = '', isLeft = true) => {
         if (node === null) {
            return;
@@ -122,15 +122,38 @@ const BinarySearchTree = (array) => {
         
         return arr;
     };
+    const height = (position = root()) => {
+        if (position === null) return 0;
+
+        let lHeight = height(position.left);
+        let rHeight = height(position.right);
+
+        if (lHeight > rHeight) return lHeight + 1;
+        else return rHeight + 1;
+    };
+    const depth = (node, position = root(), depthValue = 0) => {
+        if (position === null || node === null) return;
+        if (node === position) return depthValue;
+        
+        if (node.element < position.element) return depth(node, position.left, depthValue += 1);
+        else return depth(node, position.right, depthValue += 1);
+    };
+    const isBalanced = (position = root()) => {
+        const lHeight = height(position.left);
+        const rHeight = height(position.right);
+        const diff = Math.abs(lHeight - rHeight);
+        return diff < 2 ? 'true' : 'false';
+    };
+    const rebalance = (position = root()) => {
+        let arr = levelOrder([], [], root);
+        arr.sort((a, b) => a - b);
+        return position = buildTree(arr);
+    };
     
-    return { root, prettyPrint, insert, remove, find, levelOrder, inorder, preorder, postorder };
+    return { root, prettyPrint, insert, remove, find, levelOrder, inorder, preorder, postorder, height, depth, isBalanced, rebalance};
 }
 
 let array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const tree = BinarySearchTree(array);
 const root = tree.root();
 tree.prettyPrint(root);
-tree.prettyPrint(tree.insert(2));
-tree.prettyPrint(tree.remove(4));
-console.log(tree.find(6345));
-console.log(tree.postorder());
