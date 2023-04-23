@@ -95,8 +95,35 @@ const BinarySearchTree = (array) => {
 
         return arr;
     };
+    const inorder = (arr = [], position = root()) => {
+        if (position === null) return;
+      
+        if (position.left) inorder(arr, position.left);
+        arr.push(position.element);
+        if (position.right) inorder(arr, position.right);
+        
+        return arr;
+    };
+    const preorder = (arr = [], position = root()) => {
+        if (position === null) return;
+      
+        arr.push(position.element);
+        if (position.left) inorder(arr, position.left);
+        if (position.right) inorder(arr, position.right);
+        
+        return arr;
+    };
+    const postorder = (arr = [], position = root()) => {
+        if (position === null) return;
+      
+        if (position.left) inorder(arr, position.left);
+        if (position.right) inorder(arr, position.right);
+        arr.push(position.element);
+        
+        return arr;
+    };
     
-    return { root, prettyPrint, insert, remove, find, levelOrder };
+    return { root, prettyPrint, insert, remove, find, levelOrder, inorder, preorder, postorder };
 }
 
 let array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
@@ -106,4 +133,4 @@ tree.prettyPrint(root);
 tree.prettyPrint(tree.insert(2));
 tree.prettyPrint(tree.remove(4));
 console.log(tree.find(6345));
-console.log(tree.levelOrder());
+console.log(tree.postorder());
