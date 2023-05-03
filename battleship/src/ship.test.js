@@ -4,7 +4,7 @@ describe('Ship', () => {
   let ship;
 
   beforeEach(() => {
-    ship = Ship(3);
+    ship = Ship('midway', 3);
   });
 
   test('takes a hit', () => {
