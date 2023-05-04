@@ -21,15 +21,18 @@ const Player = (name) => {
 
   const AI = (lastShot) => {
     if (lastShot.hit) {
-      const directions = [1, -1, 10, -10]; // possible directions to move
+      let directions = [1, -1, 10, -10]; // possible directions to move
       let nextMove;
-      let timeOut = 0;
 
       do {
-        const randomDirection = directions[getRandomNum(directions.length)];
+        const position = getRandomNum(directions.length);
+        const randomDirection = directions[position];
         nextMove = lastShot.location + randomDirection;
-        timeOut += 1;
-        if (timeOut === directions.length) return getRandMove();
+        directions = directions
+          .slice(0, position)
+          .concat(directions.slice(position + 1));
+
+        if (directions.length === 0) return getRandMove();
       } while (
         playerInfo.shots.includes(nextMove) ||
         nextMove > 99 ||

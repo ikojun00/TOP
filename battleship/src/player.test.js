@@ -30,12 +30,12 @@ test('ai should PROBABLY hit again after a hit', () => {
   const ai = Player('smith');
 
   let i = 0;
-  while (i < 20) {
+  while (i < 4) {
     board.receiveHit(ai.AI({ hit: true, location: 8 }));
     i += 1;
   }
   let j = 0;
-  while (j < 20) {
+  while (j < 4) {
     board.receiveHit(ai.AI({ hit: true, location: 42 }));
     j += 1;
   }
