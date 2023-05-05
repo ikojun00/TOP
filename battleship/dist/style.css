@@ -1,4 +1,81 @@
+@import "../normalize.css/normalize.css";
+
+:root 
+{
+    --content: #dce0d9;
+    --sideContent: #fbf6ef;
+    --header: #ead7c3;
+}
+
 body
 {
-    background-color: blue;
+    display: flex;
+    flex-direction: column;
+}
+
+#header
+{
+    background-color: var(--header);
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10vh;
+    font-weight: bold;
+}
+
+#content
+{
+    height: 85vh;
+    background-color: var(--content);
+    display: flex;
+}
+
+#playerSide, #enemySide
+{
+    width: 50vw;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#playerBoard, #enemyBoard
+{
+    width: 35vw;
+    height: 65vh;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
+#addShips
+{
+    width: 50vw;
+    background-color: var(--sideContent);
+    display: flex;
+    padding: 2rem;
+    align-items: center;
+    gap: 2rem;
+}
+
+.block
+{
+    background-color: var(--content);
+    width: 5rem;
+    height: 5rem;
+    border: solid 1px;
+}
+
+#submitButton, #playAgainButton
+{
+    width: 10rem;
+    height: 4rem;
+    align-self: center;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: var(--sideContent);
+    border: 1px solid;
+    border-radius: 10px;
 }

@@ -6,18 +6,65 @@
         <link rel="stylesheet" href="style.css"> 
     </head>
     <body>
-        <div id="playersBoard">
+        <div id="header">Battleship</div>
+        <div id="content">
+            <div id="nameSelection">
+                <form id="nameForm" novalidate>
+                <div class="nameContainer">
+                    <p>Enter your name:</p> 
+                    <input required type="text" value="" placeholder="Admiral" id="nameInput" >  
+                </div>  
+                <input type="submit" value="Submit" id="submitButton">
+                </form>
+            </div>
 
-        </div>
-        <div id="selection">
+            <div id="endgame">
+                <div id="endgameContent">
+                    <p id="winnerText">Placeholder is the Winner!!</p> 
+                <input type="submit" value="Play Again" id="playAgainButton">
+                </div>
+            </div>
 
+            <div id="playerSide">
+                <p id="playerName">Player Name's Board</p>
+                <div id="playerBoard"></div>
+            </div>
+            
+            <div id="addShips">
+                <div class="ship" id="battleship" draggable="true">
+                    <div class="block"></div>
+                    <div class="block"></div>
+                    <div class="block"></div>
+                    <div class="block"></div>
+                </div>    
+                <div class="ship" id="carrier" draggable="true">
+                    <div class="block"></div>
+                    <div class="block"></div>
+                    <div class="block"></div>
+                    <div class="block"></div>
+                    <div class="block"></div>
+                </div>
+                <div class="ship" id="submarine" draggable="true">
+                    <div class="block"></div>
+                    <div class="block"></div>
+                    <div class="block"></div>
+                </div>
+                <div class="ship" id="destroyer" draggable="true">
+                    <div class="block"></div>
+                    <div class="block"></div>
+                    <div class="block"></div>
+                </div>
+                <div class="ship" id="patrolboat" draggable="true">
+                    <div class="block"></div>
+                    <div class="block"></div>
+                </div>
+            </div>
+            <div id="enemySide">
+                <p>AI's Board</p>
+                <div id="enemyBoard"></div>
+            </div>
         </div>
-        <div id="enemysBoard">
 
-        </div>
-        <div id="options">
-
-        </div>
         <script src="main.js"></script>
     </body>
 </html>

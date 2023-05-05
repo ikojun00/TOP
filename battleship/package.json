@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "eslint-config-wesbos": "^3.2.3",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "normalize.css": "^8.0.1"
   }
 }
