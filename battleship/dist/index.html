@@ -6,31 +6,31 @@
         <link rel="stylesheet" href="style.css"> 
     </head>
     <body>
-        <div id="header">Battleship</div>
         <div id="content">
             <div id="nameSelection">
                 <form id="nameForm" novalidate>
                 <div class="nameContainer">
-                    <p>Enter your name:</p> 
+                    <h3>Enter your name:</h3> 
                     <input required type="text" value="" placeholder="Admiral" id="nameInput" >  
                 </div>  
                 <input type="submit" value="Submit" id="submitButton">
                 </form>
             </div>
 
-            <div id="endgame">
+            <div id="endgame" style="display: none;">
                 <div id="endgameContent">
                     <p id="winnerText">Placeholder is the Winner!!</p> 
                 <input type="submit" value="Play Again" id="playAgainButton">
                 </div>
             </div>
 
-            <div id="playerSide">
+            <div id="playerSide" style="display: none;">
                 <p id="playerName">Player Name's Board</p>
                 <div id="playerBoard"></div>
             </div>
             
-            <div id="addShips">
+            <div id="addShips" style="display: none;">
+                <input type="submit" style="background-color: var(--header);" value="Random" id="randomButton">
                 <div class="ship" id="battleship" draggable="true">
                     <div class="block"></div>
                     <div class="block"></div>
@@ -58,8 +58,9 @@
                     <div class="block"></div>
                     <div class="block"></div>
                 </div>
+                <input type="submit" value="Play" id="playButton">
             </div>
-            <div id="enemySide">
+            <div id="enemySide" style="display: none;">
                 <p>AI's Board</p>
                 <div id="enemyBoard"></div>
             </div>
