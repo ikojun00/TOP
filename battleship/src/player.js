@@ -50,6 +50,7 @@ const Player = (name) => {
     AI,
     getRandMove,
     resetShots,
+    getRandomNum,
   };
 };
 
