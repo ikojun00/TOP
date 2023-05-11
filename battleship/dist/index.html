@@ -11,7 +11,7 @@
                 <form id="nameForm" novalidate>
                 <div class="nameContainer">
                     <h3>Enter your name:</h3> 
-                    <input required type="text" value="" placeholder="Admiral" id="nameInput" >  
+                    <input required type="text" value="" placeholder="Admiral" id="nameInput">  
                 </div>  
                 <input type="submit" value="Submit" id="submitButton">
                 </form>
@@ -19,44 +19,16 @@
 
             <div id="endgame" style="display: none;">
                 <div id="endgameContent">
-                    <p id="winnerText">Placeholder is the Winner!!</p> 
+                    <p id="winnerText"></p> 
                 </div>
             </div>
 
             <div id="playerSide" style="display: none;">
-                <p id="playerName">Player Name's Board</p>
+                <p id="playerName"></p>
                 <div id="playerBoard"></div>
             </div>
-            
             <div id="addShips" style="display: none;">
                 <input type="submit" style="background-color: var(--header);" value="Random" id="randomButton">
-                <div class="ship" id="battleship" draggable="true">
-                    <div class="block"></div>
-                    <div class="block"></div>
-                    <div class="block"></div>
-                    <div class="block"></div>
-                </div>    
-                <div class="ship" id="carrier" draggable="true">
-                    <div class="block"></div>
-                    <div class="block"></div>
-                    <div class="block"></div>
-                    <div class="block"></div>
-                    <div class="block"></div>
-                </div>
-                <div class="ship" id="submarine" draggable="true">
-                    <div class="block"></div>
-                    <div class="block"></div>
-                    <div class="block"></div>
-                </div>
-                <div class="ship" id="destroyer" draggable="true">
-                    <div class="block"></div>
-                    <div class="block"></div>
-                    <div class="block"></div>
-                </div>
-                <div class="ship" id="patrolboat" draggable="true">
-                    <div class="block"></div>
-                    <div class="block"></div>
-                </div>
                 <input type="submit" value="Play" id="playButton">
             </div>
             <div id="enemySide" style="display: none;">
