@@ -3,17 +3,10 @@ import Ship from './ship';
 import Player from './player';
 
 function setupingBoard(value) {
-  if (value === 'human') {
-    playerBoard.clearBoard();
-    removeGridElements('playerBoard');
-    placeAllShips(value);
-    createGridElements('playerBoard');
-  } else if (value === 'ai') {
-    playerBoard.clearBoard();
-    removeGridElements('playerBoard');
-    placeAllShips(value);
-    createGridElements('playerBoard');
-  } else return -1;
+  playerBoard.clearBoard();
+  removeGridElements('playerBoard');
+  placeAllShips(value);
+  createGridElements('playerBoard');
 }
 
 function createGridElements(id) {
@@ -109,7 +102,7 @@ submitButton.addEventListener('click', (e) => {
   document.getElementById('playerName').innerHTML = `${
     document.getElementById('nameInput').value
   }'s Board`;
-  createGridElements('playerBoard');
+  setupingBoard(player.playerInfo.name);
   document.getElementById('playerSide').style.display = 'flex';
   document.getElementById('addShips').style.display = 'flex';
   document.getElementById('nameSelection').style.display = 'none';
