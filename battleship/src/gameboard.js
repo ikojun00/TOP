@@ -15,6 +15,12 @@ const Gameboard = (ownerName) => {
     }
   };
 
+  const clearBoard = () => {
+    for (let i = 0; i < 100; i += 1) {
+      boardInfo.board[i] = { ship: false, beenHit: false };
+    }
+  };
+
   if (boardInfo.board.length === 0) {
     fillBoard();
   }
@@ -51,7 +57,7 @@ const Gameboard = (ownerName) => {
     allShipsSunk();
   };
 
-  return { boardInfo, placeShip, receiveHit, allShipsSunk };
+  return { boardInfo, placeShip, receiveHit, allShipsSunk, clearBoard };
 };
 
 module.exports = Gameboard;

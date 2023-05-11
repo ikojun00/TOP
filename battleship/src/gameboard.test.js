@@ -72,3 +72,11 @@ test('all ships sunk', () => {
   board.allShipsSunk();
   expect(board.boardInfo.shipsLeft).toBe(false);
 });
+
+test('clear board', () => {
+  const board = Gameboard('player');
+  const ship = Ship('midway', 5);
+  board.placeShip(ship, 5);
+  board.clearBoard();
+  expect(board.boardInfo.board[6].ship).toBe(false);
+});
