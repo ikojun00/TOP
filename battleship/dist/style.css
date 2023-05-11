@@ -12,6 +12,11 @@ body
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+#nameContainer
+{
+    font-size: 1.5rem
+}
+
 #content
 {
     height: 100vh;
@@ -33,7 +38,7 @@ body
 {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 #playerSide, #enemySide
@@ -69,19 +74,6 @@ body
     gap: 2rem;
 }
 
-.ship
-{
-    display: flex;
-    flex-direction: row;
-}
-
-.block
-{
-    background-color: var(--sideContent);
-    width: 3rem;
-    height: 3rem;
-    border: solid 1px;
-}
 
 #submitButton, #playAgainButton, #playButton, #randomButton
 {
@@ -93,4 +85,74 @@ body
     background-color: var(--sideContent);
     border: 1px solid;
     border-radius: 10px;
+}
+
+@media only screen and (max-width: 1439px) {
+    #playerBoard, #enemyBoard
+    {
+        background-color: var(--header);
+        width: 28rem;
+        height: 28rem;
+        display: grid;
+    }
+}
+
+@media only screen and (max-width: 1023px) {
+    #content
+    {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    #nameContainer
+    {
+        font-size: 1rem
+    }
+    #addShips
+    {
+        flex-direction: row;
+        justify-content: center;
+    }
+    #submitButton, #playAgainButton, #playButton, #randomButton
+    {
+        width: 4rem;
+        height: 2.5rem;
+        font-size: 0.8rem;
+    }
+    #playerBoard, #enemyBoard
+    {
+        background-color: var(--header);
+        width: 20rem;
+        height: 20rem;
+        display: grid;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #content
+    {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    #nameContainer
+    {
+        font-size: 0.8rem
+    }
+    #addShips
+    {
+        flex-direction: row;
+        justify-content: center;
+    }
+    #submitButton, #playAgainButton, #playButton, #randomButton
+    {
+        width: 3rem;
+        height: 1.8rem;
+        font-size: 0.5rem;
+    }
+    #playerBoard, #enemyBoard
+    {
+        background-color: var(--header);
+        width: 15rem;
+        height: 15rem;
+        display: grid;
+    }
 }
