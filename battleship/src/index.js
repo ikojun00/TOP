@@ -114,6 +114,7 @@ submitButton.addEventListener('click', (e) => {
 const randomButton = document.getElementById('randomButton');
 randomButton.addEventListener('click', (e) => {
   setupingBoard(player.playerInfo.name);
+  document.getElementById('playButton').style.display = 'flex';
   e.preventDefault();
 });
 
@@ -174,5 +175,4 @@ const submarineAI = Ship('I-68', 3, verticalOrHorizontal());
 const patrolboatAI = Ship('Shimakaze', 2, verticalOrHorizontal());
 
 placeAllShips(ai.playerInfo.name);
-placeAllShips(player.playerInfo.name);
 createGridElements('playerBoard');
