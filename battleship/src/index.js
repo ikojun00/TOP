@@ -115,6 +115,7 @@ const randomButton = document.getElementById('randomButton');
 randomButton.addEventListener('click', (e) => {
   setupingBoard(player.playerInfo.name);
   document.getElementById('playButton').style.display = 'flex';
+  document.getElementById('ships').style.display = 'none';
   e.preventDefault();
 });
 
