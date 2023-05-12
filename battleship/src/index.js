@@ -97,6 +97,7 @@ function verticalOrHorizontal() {
   return -1;
 }
 
+/*
 const submitButton = document.getElementById('submitButton');
 submitButton.addEventListener('click', (e) => {
   document.getElementById('playerName').innerHTML = `${
@@ -108,6 +109,7 @@ submitButton.addEventListener('click', (e) => {
   document.getElementById('nameSelection').style.display = 'none';
   e.preventDefault();
 });
+*/
 
 const randomButton = document.getElementById('randomButton');
 randomButton.addEventListener('click', (e) => {
@@ -121,9 +123,14 @@ playButton.addEventListener('click', (e) => {
   document.getElementById('enemySide').style.display = 'flex';
   document.getElementById('addShips').style.display = 'none';
   boardButtons();
-  console.table(playerBoard.boardInfo.board);
-  console.table(aiBoard.boardInfo.board);
+  // console.table(playerBoard.boardInfo.board);
+  // console.table(aiBoard.boardInfo.board);
   e.preventDefault();
+});
+
+const playAgainButton = document.getElementById('playAgainButton');
+playAgainButton.addEventListener('click', () => {
+  window.location.reload(true);
 });
 
 function boardButtons() {
@@ -167,3 +174,5 @@ const submarineAI = Ship('I-68', 3, verticalOrHorizontal());
 const patrolboatAI = Ship('Shimakaze', 2, verticalOrHorizontal());
 
 placeAllShips(ai.playerInfo.name);
+placeAllShips(player.playerInfo.name);
+createGridElements('playerBoard');
