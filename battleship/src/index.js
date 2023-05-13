@@ -119,6 +119,33 @@ randomButton.addEventListener('click', (e) => {
   e.preventDefault();
 });
 
+const cursorsButtons = document.querySelectorAll('.cursors > button');
+cursorsButtons.forEach((button) => {
+  let displayedShip;
+  let nextShip;
+  let shipHTML;
+  let shipsHTML;
+  button.addEventListener('click', () => {
+    shipHTML = document.querySelector('#ship');
+    shipsHTML = shipHTML.querySelectorAll(':scope > *');
+    shipsHTML.forEach((element) => {
+      if (element.style.display === 'flex') displayedShip = element;
+    });
+    if (button.id === 'left-cursor') {
+      nextShip =
+        shipsHTML[
+          (Number(displayedShip.dataset.ship) - 1 + shipsHTML.length) %
+            shipsHTML.length
+        ];
+    } else if (button.id === 'right-cursor') {
+      nextShip =
+        shipsHTML[(Number(displayedShip.dataset.ship) + 1) % shipsHTML.length];
+    }
+    displayedShip.style.display = 'none';
+    nextShip.style.display = 'flex';
+  });
+});
+
 const playButton = document.getElementById('playButton');
 playButton.addEventListener('click', (e) => {
   createGridElements('enemyBoard');
