@@ -17,6 +17,61 @@ function createGridElements(id) {
     const gridElement = document.createElement('button');
     gridElement.classList.add(`${id}-grid-element`);
     gridElement.dataset.coord = i;
+    gridElement.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      gridElement.classList.add('dragover');
+    });
+
+    gridElement.addEventListener('drop', (e) => {
+      const shipMap = {
+        carrier: { ship: carrier, index: 0 },
+        battleship: { ship: battleship, index: 1 },
+        destroyer: { ship: destroyer, index: 2 },
+        submarine: { ship: submarine, index: 3 },
+        patrolboat: { ship: patrolboat, index: 4 },
+      };
+      const data = e.dataTransfer.getData('text/plain');
+      const { ship, index } = shipMap[data];
+      console.log(ship);
+      if (
+        validateShip(
+          ship,
+          Number(e.target.dataset.coord),
+          playerBoard.boardInfo.board
+        ) === true
+      ) {
+        playerBoard.placeShip(ship, Number(e.target.dataset.coord));
+        if (ship.isVertical) {
+          for (let j = 0; j < ship.length; j += 1) {
+            const item = document.querySelector(
+              `[data-coord = "${Number(gridElement.dataset.coord) + j * 10}"]`
+            );
+            item.style.backgroundColor = 'pink';
+          }
+        } else {
+          for (let j = 0; j < ship.length; j += 1) {
+            const item = document.querySelector(
+              `[data-coord = "${Number(gridElement.dataset.coord) + j}"]`
+            );
+            item.style.backgroundColor = 'pink';
+          }
+        }
+        shipsHTML[
+          (index + shipsHTML.length + 1) % shipsHTML.length
+        ].style.display = 'flex';
+        shipsHTML[(index + shipsHTML.length) % shipsHTML.length].style.display =
+          'none';
+        const element = document.getElementById(data);
+        shipsArray.splice(shipsArray.indexOf(element), 1);
+        element.remove();
+        gridElement.classList.remove('dragover');
+        if (shipsArray.length === 0) {
+          document.getElementById('playButton').style.display = 'flex';
+          document.getElementById('ships').style.display = 'none';
+        }
+      }
+      console.table(playerBoard.boardInfo.board);
+    });
     if (playerBoard.boardInfo.board[i].ship !== false && id === 'playerBoard')
       gridElement.style.backgroundColor = 'pink';
     board.append(gridElement);
@@ -119,27 +174,33 @@ randomButton.addEventListener('click', (e) => {
   e.preventDefault();
 });
 
+const shipHTML = document.querySelector('#ship');
+const shipsHTML = shipHTML.querySelectorAll(':scope > *');
+const shipsArray = Array.from(shipsHTML);
+
+shipsHTML.forEach((element) => {
+  element.addEventListener('dragstart', (e) => {
+    e.dataTransfer.setData('text/plain', e.target.id);
+  });
+});
+
 const cursorsButtons = document.querySelectorAll('.cursors > button');
 cursorsButtons.forEach((button) => {
   let displayedShip;
   let nextShip;
-  let shipHTML;
-  let shipsHTML;
   button.addEventListener('click', () => {
-    shipHTML = document.querySelector('#ship');
-    shipsHTML = shipHTML.querySelectorAll(':scope > *');
-    shipsHTML.forEach((element) => {
-      if (element.style.display === 'flex') displayedShip = element;
-    });
+    displayedShip = shipsArray.find(
+      (element) => element.style.display === 'flex'
+    );
     if (button.id === 'left-cursor') {
       nextShip =
-        shipsHTML[
-          (Number(displayedShip.dataset.ship) - 1 + shipsHTML.length) %
-            shipsHTML.length
+        shipsArray[
+          (shipsArray.indexOf(displayedShip) - 1 + shipsArray.length) %
+            shipsArray.length
         ];
     } else if (button.id === 'right-cursor') {
       nextShip =
-        shipsHTML[(Number(displayedShip.dataset.ship) + 1) % shipsHTML.length];
+        shipsArray[(shipsArray.indexOf(displayedShip) + 1) % shipsArray.length];
     }
     displayedShip.style.display = 'none';
     nextShip.style.display = 'flex';
