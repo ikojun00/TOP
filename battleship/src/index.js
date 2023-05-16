@@ -23,12 +23,34 @@ function createGridElements(id) {
     });
 
     gridElement.addEventListener('drop', (e) => {
+      const isVertical =
+        document.getElementById('verticalOrHorizontalButton').innerHTML ===
+        'Vertical';
       const shipMap = {
-        carrier: { ship: carrier, index: 0 },
-        battleship: { ship: battleship, index: 1 },
-        destroyer: { ship: destroyer, index: 2 },
-        submarine: { ship: submarine, index: 3 },
-        patrolboat: { ship: patrolboat, index: 4 },
+        carrier: {
+          ship: isVertical
+            ? Ship('USS Enterprise', 5)
+            : Ship('USS Enterprise', 5, true),
+          index: 0,
+        },
+        battleship: {
+          ship: isVertical
+            ? Ship('Minneapolis', 4)
+            : Ship('Minneapolis', 4, true),
+          index: 1,
+        },
+        destroyer: {
+          ship: isVertical ? Ship('Anderson', 3) : Ship('Anderson', 3, true),
+          index: 2,
+        },
+        submarine: {
+          ship: isVertical ? Ship('Nautilus', 3) : Ship('Nautilus', 3, true),
+          index: 3,
+        },
+        patrolboat: {
+          ship: isVertical ? Ship('PT-20', 2) : Ship('PT-20', 2, true),
+          index: 4,
+        },
       };
       const data = e.dataTransfer.getData('text/plain');
       const { ship, index } = shipMap[data];
@@ -68,6 +90,8 @@ function createGridElements(id) {
         if (shipsArray.length === 0) {
           document.getElementById('playButton').style.display = 'flex';
           document.getElementById('ships').style.display = 'none';
+          document.getElementById('verticalOrHorizontal').style.display =
+            'none';
         }
       }
       console.table(playerBoard.boardInfo.board);
@@ -89,7 +113,7 @@ function validateShip(ship, num, board) {
     for (let i = 0; i < ship.length; i += 1)
       if (board[num + i * 10].ship !== false) return false;
   } else if (ship.isVertical === false) {
-    if (num % 10 > (num + ship.length) % 10) return false;
+    if (num % 10 > (num + ship.length - 1) % 10) return false;
     for (let i = 0; i < ship.length; i += 1)
       if (board[num + i].ship !== false) return false;
   } else return -1;
@@ -97,6 +121,11 @@ function validateShip(ship, num, board) {
 }
 
 function placeAllShips(value) {
+  const carrier = Ship('USS Enterprise', 5, verticalOrHorizontal());
+  const battleship = Ship('Minneapolis', 4, verticalOrHorizontal());
+  const destroyer = Ship('Anderson', 3, verticalOrHorizontal());
+  const submarine = Ship('Nautilus', 3, verticalOrHorizontal());
+  const patrolboat = Ship('PT-20', 2, verticalOrHorizontal());
   if (value === 'ai') {
     const aiShips = [
       carrierAI,
@@ -171,6 +200,27 @@ randomButton.addEventListener('click', (e) => {
   setupingBoard(player.playerInfo.name);
   document.getElementById('playButton').style.display = 'flex';
   document.getElementById('ships').style.display = 'none';
+  document.getElementById('verticalOrHorizontal').style.display = 'none';
+  e.preventDefault();
+});
+
+const verticalOrHorizontalButton = document.getElementById(
+  'verticalOrHorizontalButton'
+);
+verticalOrHorizontalButton.addEventListener('click', (e) => {
+  if (e.target.innerHTML === 'Vertical') {
+    const children = document.querySelectorAll('#ship > *');
+    children.forEach((child) => {
+      child.style.flexDirection = 'column';
+    });
+    e.target.innerHTML = 'Horizontal';
+  } else {
+    const children = document.querySelectorAll('#ship > *');
+    children.forEach((child) => {
+      child.style.flexDirection = 'row';
+    });
+    e.target.innerHTML = 'Vertical';
+  }
   e.preventDefault();
 });
 
@@ -250,12 +300,6 @@ const playerBoard = Gameboard('human');
 const aiBoard = Gameboard('ai');
 const player = Player('human');
 const ai = Player('ai');
-
-const carrier = Ship('USS Enterprise', 5, verticalOrHorizontal());
-const battleship = Ship('Minneapolis', 4, verticalOrHorizontal());
-const destroyer = Ship('Anderson', 3, verticalOrHorizontal());
-const submarine = Ship('Nautilus', 3, verticalOrHorizontal());
-const patrolboat = Ship('PT-20', 2, verticalOrHorizontal());
 
 const carrierAI = Ship('Akagi', 5, verticalOrHorizontal());
 const battleshipAI = Ship('Nagato', 4, verticalOrHorizontal());
