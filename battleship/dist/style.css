@@ -76,12 +76,13 @@ body
 }
 
 
-#submitButton, #playAgainButton, #playButton, #randomButton
+#submitButton, #playAgainButton, #playButton, #randomButton, #verticalOrHorizontalButton
 {
     width: 5rem;
     height: 3rem;
     display: flex;
     justify-content: center;
+    align-items: center;
     font-size: 1rem;
     font-weight: bold;
     background-color: var(--header);
