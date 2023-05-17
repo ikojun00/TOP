@@ -37,10 +37,11 @@ function updateSizeValue(value)
     sizeValue.innerHTML = `${value} x ${value}`
 }
   
-function clearCanvas(value) {
+function clearCanvas() {
     const board = document.querySelector('.board');
     board.innerHTML = ''
-    createGridElements(value);
+    const sizeSlider = document.getElementById('sizeSlider');
+    createGridElements(sizeSlider.value);
 }
 
 function drawingCanvas(value)
