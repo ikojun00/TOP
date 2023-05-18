@@ -109,7 +109,7 @@ function removeGridElements(id) {
 
 function validateShip(ship, num, board) {
   if (ship.isVertical === true) {
-    if (num + ship.length * 10 > 100) return false;
+    if (num + (ship.length - 1) * 10 > 100) return false;
     for (let i = 0; i < ship.length; i += 1)
       if (board[num + i * 10].ship !== false) return false;
   } else if (ship.isVertical === false) {
