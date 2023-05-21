@@ -27,29 +27,24 @@ function addEventListenerToGridElement(gridElement) {
         ship: isVertical
           ? Ship('USS Enterprise', 5)
           : Ship('USS Enterprise', 5, true),
-        index: 0,
       },
       battleship: {
         ship: isVertical
           ? Ship('Minneapolis', 4)
           : Ship('Minneapolis', 4, true),
-        index: 1,
       },
       destroyer: {
         ship: isVertical ? Ship('Anderson', 3) : Ship('Anderson', 3, true),
-        index: 2,
       },
       submarine: {
         ship: isVertical ? Ship('Nautilus', 3) : Ship('Nautilus', 3, true),
-        index: 3,
       },
       patrolboat: {
         ship: isVertical ? Ship('PT-20', 2) : Ship('PT-20', 2, true),
-        index: 4,
       },
     };
     const data = e.dataTransfer.getData('text/plain');
-    const { ship, index } = shipMap[data];
+    const { ship } = shipMap[data];
     if (
       validateShip(
         ship,
@@ -73,13 +68,17 @@ function addEventListenerToGridElement(gridElement) {
           item.style.backgroundColor = '#8d99ae';
         }
       }
-      shipsHTML[
-        (index + shipsHTML.length + 1) % shipsHTML.length
-      ].style.display = 'flex';
-      shipsHTML[(index + shipsHTML.length) % shipsHTML.length].style.display =
-        'none';
+
       const element = document.getElementById(data);
+      shipsArray[
+        (shipsArray.indexOf(element) + shipsArray.length + 1) %
+          shipsArray.length
+      ].style.display = 'flex';
+      shipsArray[
+        shipsArray.indexOf(element) + (shipsArray.length % shipsArray.length)
+      ].style.display = 'none';
       shipsArray.splice(shipsArray.indexOf(element), 1);
+      console.log(shipsArray);
       element.remove();
       gridElement.classList.remove('dragover');
       if (shipsArray.length === 0) {
