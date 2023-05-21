@@ -68,14 +68,14 @@ function createGridElements(id) {
             const item = document.querySelector(
               `[data-coord = "${Number(gridElement.dataset.coord) + j * 10}"]`
             );
-            item.style.backgroundColor = 'pink';
+            item.style.backgroundColor = '#8d99ae';
           }
         } else {
           for (let j = 0; j < ship.length; j += 1) {
             const item = document.querySelector(
               `[data-coord = "${Number(gridElement.dataset.coord) + j}"]`
             );
-            item.style.backgroundColor = 'pink';
+            item.style.backgroundColor = '#8d99ae';
           }
         }
         shipsHTML[
@@ -97,7 +97,7 @@ function createGridElements(id) {
       console.table(playerBoard.boardInfo.board);
     });
     if (playerBoard.boardInfo.board[i].ship !== false && id === 'playerBoard')
-      gridElement.style.backgroundColor = 'pink';
+      gridElement.style.backgroundColor = '#8d99ae';
     board.append(gridElement);
   }
 }

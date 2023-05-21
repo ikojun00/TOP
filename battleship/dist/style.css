@@ -2,14 +2,15 @@
 
 :root 
 {
-    --header: #dce0d9;
-    --sideContent: #fbf6ef;
-    --content: #ead7c3;
+    --text: #edf2f4;
+    --sideContent: #8d99ae;
+    --content: #2b2d42;
 }
 
 body
 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: var(--text);
 }
 
 #nameContainer
@@ -53,7 +54,7 @@ body
 
 #playerBoard, #enemyBoard
 {
-    background-color: var(--header);
+    background-color: var(--text);
     width: 31rem;
     height: 31rem;
     display: grid;
@@ -85,7 +86,8 @@ body
     align-items: center;
     font-size: 1rem;
     font-weight: bold;
-    background-color: var(--header);
+    background-color: var(--sideContent);
+    color: var(--text);
     border: 1px solid;
     border-radius: 10px;
 }
@@ -147,7 +149,6 @@ body
 @media only screen and (max-width: 1439px) {
     #playerBoard, #enemyBoard
     {
-        background-color: var(--header);
         width: 28rem;
         height: 28rem;
         display: grid;
@@ -169,7 +170,7 @@ body
         flex-direction: row;
         justify-content: center;
     }
-    #submitButton, #playAgainButton, #playButton, #randomButton
+    #submitButton, #playAgainButton, #playButton, #randomButton, #verticalOrHorizontalButton
     {
         width: 4rem;
         height: 2.5rem;
@@ -177,7 +178,6 @@ body
     }
     #playerBoard, #enemyBoard
     {
-        background-color: var(--header);
         width: 20rem;
         height: 20rem;
         display: grid;
@@ -199,7 +199,7 @@ body
         flex-direction: row;
         justify-content: center;
     }
-    #submitButton, #playAgainButton, #playButton, #randomButton
+    #submitButton, #playAgainButton, #playButton, #randomButton, #verticalOrHorizontalButton
     {
         width: 3rem;
         height: 1.8rem;
@@ -207,7 +207,6 @@ body
     }
     #playerBoard, #enemyBoard
     {
-        background-color: var(--header);
         width: 15rem;
         height: 15rem;
         display: grid;
