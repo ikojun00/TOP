@@ -1,6 +1,15 @@
+:root 
+{
+    --sideContent: #83c5be;
+    --content: #006d77;
+    --text: black;
+}
+
 body
 {
     font-family: 'Courier New', Courier, monospace;
+    background-color: var(--content);
+    color: var(--text);
 }
 
 .content
@@ -13,7 +22,7 @@ body
 
 .card
 {
-    background-color: lightgray;
+    background-color: var(--sideContent);
     padding: 10px;
     width: 300px;
     height: 300px;
