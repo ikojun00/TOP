@@ -150,13 +150,13 @@ function addEventListenerToButtons() {
           removeAllChildNodes(content);
           const form = document.getElementById('myForm');
           const formData = new FormData(form);
-          e.preventDefault();
           new Book().addBookToLibrary(formData);
           closeForm();
         }
       } else if (button.id === 'open-button') openForm();
       else if (button.id === 'close-button') closeForm();
       else return -1;
+      e.preventDefault(); // Prevent form submission from refreshing the page
     });
   });
 }
