@@ -1,11 +1,19 @@
+body
+{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container
 {
-    width: 408px;
+    width: 20rem;
+    height: 25rem;
     border-radius: 4px;
     display: grid;
-    grid-template-columns: repeat(4, 100px);
-    grid-template-rows: minmax(100px, auto) repeat(5, 80px);
-    gap: 2px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1.5fr repeat(5, 1fr);
     background-color: black;
 }
 
@@ -17,8 +25,8 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-end;
-    font-size: 50px;
-    margin: 5px;
+    font-size: 2rem;
+    margin: 0.2rem;
 }
 
 #nine, #eight, #seven, #six, #five, #four, #three, #two, #one, #null
