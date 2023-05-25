@@ -40,6 +40,12 @@ button
     border: none;
 }
 
+img
+{
+    width: 1rem;
+    height: auto;
+}
+
 .remove-button > button
 {
     background-color: var(--sideContent);
