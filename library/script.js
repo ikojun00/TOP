@@ -5,8 +5,9 @@ function myLibrary(latestBook) {
   const removeButton = document.createElement('div');
   removeButton.classList.add('remove-button');
   const btnRemoveButton = document.createElement('button');
-  const textRemoveButton = document.createTextNode('X');
-  btnRemoveButton.appendChild(textRemoveButton);
+  const imgRemoveButton = document.createElement('img');
+  imgRemoveButton.src = "SVG/close-mini-1522-svgrepo-com.svg"
+  btnRemoveButton.appendChild(imgRemoveButton);
   removeButton.appendChild(btnRemoveButton);
   book.appendChild(removeButton);
   btnRemoveButton.addEventListener('click', (e) => {

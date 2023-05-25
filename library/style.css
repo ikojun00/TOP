@@ -1,8 +1,8 @@
 :root 
 {
-    --sideContent: #83c5be;
-    --content: #006d77;
-    --text: black;
+    --sideContent: #b8b8ff;
+    --content: #9381ff;
+    --text: #f8f7ff;
 }
 
 body
@@ -33,6 +33,16 @@ form
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+button
+{
+    border: none;
+}
+
+.remove-button > button
+{
+    background-color: var(--sideContent);
 }
 
 .remove-button
