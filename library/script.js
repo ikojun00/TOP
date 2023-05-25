@@ -11,14 +11,14 @@ function myLibrary(latestBook) {
   removeButton.appendChild(btnRemoveButton);
   book.appendChild(removeButton);
   btnRemoveButton.addEventListener('click', (e) => {
-    const removedTitle = e.target.parentNode.nextElementSibling.textContent;
+    const removedTitle = e.target.parentNode.parentNode.nextElementSibling.textContent;
     for (let i = 0; i < books.length; i++) {
       if (removedTitle === `Title: ${books[i].title}Author: ${books[i].author}Pages: ${books[i].pages}`) {
         books.splice(i, 1);
       }
     }
-    e.target.parentNode.parentNode.parentNode.removeChild(
-      e.target.parentNode.parentNode
+    e.target.parentNode.parentNode.parentNode.parentNode.removeChild(
+      e.target.parentNode.parentNode.parentNode
     );
   });
   const cardContent = document.createElement('div');
