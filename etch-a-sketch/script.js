@@ -15,8 +15,8 @@ function createGridElements(size)
 
 function setMode(value)
 {
-    if(value === "color")
-        return "black";
+    if(value === "paint")
+        return document.getElementById('color').value;
     else if(value === "eraser")
         return "white";
     else

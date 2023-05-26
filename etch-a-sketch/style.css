@@ -23,7 +23,13 @@ body
     gap: 2rem;
 }
 
-button
+.buttons
+{
+    display: flex;
+    gap: 1rem;
+}
+
+.buttons>*
 {
     font-family: inherit;
     width: 5rem;
