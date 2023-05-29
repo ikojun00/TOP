@@ -40,6 +40,20 @@ function createDOM(result)
     answer.insertBefore(content, answer.firstChild);
 }
 
+function displayResults(button) 
+{
+    if(document.querySelector('.answer').style.display === 'flex')
+    {
+        document.querySelector('.answer').style.display = 'none';
+        document.getElementById(button).innerHTML = 'Show all results';
+    }   
+    else
+    {
+        document.querySelector('.answer').style.display = 'flex';
+        document.getElementById(button).innerHTML = 'Hide all results';
+    } 
+}
+
 function game(playerSelection)
 {
     const span_computer = document.getElementById("computer-score");
@@ -55,6 +69,7 @@ function game(playerSelection)
         counter_computer++;
         span_computer.textContent = counter_computer;
         createDOM(result);
+        document.getElementById('result').innerHTML = 'You lose!';
         console.log("You lose! " + "Player:" + counter_player + " Computer:" + counter_computer);
         if(counter_computer === 5)
         {
@@ -67,6 +82,7 @@ function game(playerSelection)
         counter_player++;
         span_player.textContent = counter_player;
         createDOM(result);
+        document.getElementById('result').innerHTML = 'You win!';
         console.log("You win! " + "Player:" + counter_player + " Computer:" + counter_computer);
         if(counter_player === 5)
         {
@@ -77,6 +93,7 @@ function game(playerSelection)
     else if(result == "Tie!")
     {
         createDOM(result);
+        document.getElementById('result').innerHTML = 'Tie!';
         console.log("Tie! " + "Player:" + counter_player + " Computer:" + counter_computer);
     }
     else
@@ -88,7 +105,8 @@ const buttons = document.querySelectorAll('button');
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        game(button.id);
+        if(button.id === 'results') displayResults(button.id);
+        else game(button.id);
     });
     });
 
