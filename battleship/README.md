@@ -25,10 +25,6 @@ This is a browser-based implementation of the classic game Battleship, coded in 
 - After each attack, the result (hit or miss) will be displayed on the screen.
 - The game ends when one player sinks all of the opponent's ships.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE). Feel free to use and modify the code for your own purposes.
-
 ## Acknowledgments
 
 This project is part of the curriculum from The Odin Project.
