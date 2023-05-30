@@ -9,7 +9,7 @@ This is a browser-based implementation of the classic game Battleship, coded in 
 1. Press a link: https://ikojun00.github.io/TOP/battleship/dist/index.html
 2. The game will load, and you will see your board and ships.
 3. By pressing a button called Random, ships are going to be placed randomly on your board.
-4. Also, you can place your ships on your grid by clicking on the cells and dropping on the grid.
+4. Also, you can place your ships on your grid by clicking and holding cells and dropping them on the grid.
    You can rotate the ship by pressing a button called Horizontal or Vertical.
 5. Once you have placed your ships, the game will begin. Click on the opponent's grid to attack a cell.
 6. The game will indicate whether your attack was a hit or a miss.
