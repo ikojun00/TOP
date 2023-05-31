@@ -10,10 +10,10 @@ The Odin Project provides a comprehensive learning path for aspiring web develop
 
 This repository includes the following projects:
 
-1. [Battleship](TOP/battleship): Battleship is a classic game where players strategically place ships on a grid and take turns guessing the coordinates to sink their opponent's fleet.
-2. [To Do List](TOP/to-do-list): The To-Do List is a task management application that allows users to create, organize, and track their daily tasks and activities.
-3. [Tic Tac Toe](TOP/tic-tac-toe): Tic Tac Toe is a simple two-player game where players take turns marking X or O on a 3x3 grid, aiming to get three of their marks in a row, column, or diagonal to win the game.
-4. [Library](TOP/library): The Library is a book management application that allows users to store their books and mark them as read or not read.
+1. [Battleship](battleship): Battleship is a classic game where players strategically place ships on a grid and take turns guessing the coordinates to sink their opponent's fleet.
+2. [To Do List](to-do-list): The To-Do List is a task management application that allows users to create, organize, and track their daily tasks and activities.
+3. [Tic Tac Toe](tic-tac-toe): Tic Tac Toe is a simple two-player game where players take turns marking X or O on a 3x3 grid, aiming to get three of their marks in a row, column, or diagonal to win the game.
+4. [Library](library): The Library is a book management application that allows users to store their books and mark them as read or not read.
    ...
    ...
 
