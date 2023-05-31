@@ -1,4 +1,4 @@
-# Battleship Game
+# Battleship
 
 This is a browser-based implementation of the classic game Battleship, coded in JavaScript. In this game, you will try to sink all of your opponent's ships before they sink yours. Are you ready for the challenge?
 
