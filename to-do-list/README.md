@@ -1,6 +1,6 @@
 # To Do List
 
-This is a simple to-do list application created as part of The Odin Project curriculum. It allows users to create, manage, and organize their tasks in a convenient way.
+This is a simple to do list application created as part of The Odin Project curriculum. It allows users to create, manage, and organize their tasks in a convenient way.
 
 ![To Do List screenshot](dist/JPEG/to-do-list.jpeg)
 
@@ -14,7 +14,6 @@ This is a simple to-do list application created as part of The Odin Project curr
 
 - Add new tasks with a title and optional description.
 - Mark tasks as completed.
-- Edit task details such as title and description.
 - Delete tasks.
 - Persist data using local storage.
 - Responsive design for optimal use on different devices.
