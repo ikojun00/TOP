@@ -23,9 +23,9 @@ Tic-Tac-Toe is a classic game where two players take turns marking cells on a 3x
 
 ## Usage
 
-1. Press a link: https://ikojun00.github.io/TOP/tic-tac-toe/index.html
-2. Choose between Human vs. Human and Human vs. AI
-3. Choose a difficulty of AI (if Human vs. AI)
+1. Press a link: https://ikojun00.github.io/TOP/tic-tac-toe/index.html.
+2. Choose between Human vs. Human and Human vs. AI.
+3. Choose a difficulty of AI (if Human vs. AI).
 4. The game board will be displayed on the screen with empty cells.
 5. Click on an empty cell to mark it with your symbol (X or O).
 6. Players take turns marking cells until one player wins by getting three of their symbols in a row, column, or diagonal, or the game ends in a draw.
