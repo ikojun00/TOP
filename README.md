@@ -15,8 +15,7 @@ This repository includes the following projects:
 3. [Tic Tac Toe](tic-tac-toe): Tic Tac Toe is a simple two-player game where players take turns marking X or O on a 3x3 grid, aiming to get three of their marks in a row, column, or diagonal to win the game.
 4. [Library](library): The Library is a book management application that allows users to store their books and mark them as read or not read.
 
-   ...
-   ...
+   and many more...
 
 Feel free to explore each project folder for more details, including instructions, code, and additional resources.
 You are free to use, modify, and distribute the code in this repository for personal or educational purposes.
