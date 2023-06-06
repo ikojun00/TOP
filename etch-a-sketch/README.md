@@ -16,7 +16,7 @@ This is a drawing application that allows users to draw whatever they want.
 2. By pressing a button called Paint, you can draw on your board by left-clicking and holding your mouse.
 3. By pressing a button called Clear, the board is cleared from your sketches.
 4. By pressing a button called Eraser, you can erase more precisely parts of your sketch on your board by left-clicking and holding your mouse.
-5. Changing size of your slider to higher numbers makes your drawing more narrow.
+5. Changing the size of your slider to higher numbers makes your drawing more narrow.
 6. Also, you can paint with different colors by pressing a colored button.
 
 ## Acknowledgments
