@@ -1,5 +1,37 @@
-body
+.cv
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.cvEditor
 {
     display: flex;
     flex-direction: column;
+}
+
+.cvPaper
+{
+    padding: 1.5rem 2rem;
+    border: solid;
+}
+
+.header
+{
+    display: flex;
+    flex-direction: row;
+    gap: 20rem;
+}
+  
+input 
+{
+    height: 1rem;
+    margin-left: 0.5rem;
+}
+
+.workExperience
+{
+    display: flex;
+    justify-content: space-between;
 }
