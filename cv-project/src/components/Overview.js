@@ -21,12 +21,20 @@ const Overview = (props) => {
           <strong>{task.company}</strong>
           <div className="workExperience">
             <p>{task.position}</p>
-            <p>{task.startDate}-{task.endDate}</p>
+            <p>{task.startDate} - {task.endDate}</p>
           </div>
         </div>
         ))}
       <h2>Education</h2>
       <hr />
+      {props.data.education.map((task) => (
+        <div key={task.id}>
+          <div className="workExperience">
+            <p>{task.university}</p>
+            <p>{task.startDate} - {task.endDate}</p>
+          </div>
+        </div>
+        ))}
       <h2>Technical skills</h2>
       <hr />
       <h2>Other skills and interests</h2>
