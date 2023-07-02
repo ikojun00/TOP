@@ -18,6 +18,7 @@ const Overview = (props) => {
       <hr />
       {props.data.workExperience.map((task) => (
         <div key={task.id}>
+          <br />
           <strong>{task.company}</strong>
           <div className="workExperience">
             <p>{task.position}</p>
@@ -25,6 +26,7 @@ const Overview = (props) => {
           </div>
         </div>
         ))}
+      <br />
       <h2>Education</h2>
       <hr />
       {props.data.education.map((task) => (
@@ -35,10 +37,21 @@ const Overview = (props) => {
           </div>
         </div>
         ))}
+      <br />
       <h2>Technical skills</h2>
       <hr />
+      <ul>
+      {props.data.skills.map((task) => (
+        <li key={task.id}>
+            <p>{task.skill} - {task.achieved}</p>
+        </li>
+        ))}
+      </ul>
+      <br />
       <h2>Other skills and interests</h2>
       <hr />
+      <p>Languages: {props.data.otherSkills.languages}</p>
+      <p>Hobbies: {props.data.otherSkills.hobbies}</p>
     </div>
   );
 };

@@ -26,217 +26,138 @@ class CVForm extends Component {
         university: 'Harvard',
         startDate: 'October 2020',
         endDate: 'Present'
-      }]
+      }],
+      skills: [{
+        id: uniqid(),
+        skill: 'JavaScript',
+        achieved: 'used at university courses'
+      }],
+      otherSkills: {
+        languages: 'English (native), German (fluent)',
+        hobbies: 'football, rugby, MMA...'
+      }
     };
   }
 
-  handleChangeOnBasicInfo = (e) => {
+  handleChange = (e, section, index) => {
     const { name, value } = e.target;
-    this.setState((prevState) => {
-      const updatedBasicInfo = { ...prevState.basicInfo, [name]: value };
-      return { basicInfo: updatedBasicInfo };
-    });
+    if (section === "basicInfo" || section === "otherSkills") {
+      this.setState((prevState) => ({
+        [section]: { ...prevState[section], [name]: value }
+      }));
+    } else {
+      this.setState((prevState) => {
+        const updatedSection = [...prevState[section]];
+        updatedSection[index][name] = value;
+        return { [section]: updatedSection };
+      });
+    }
   };
 
-  handleChangeOnWorkExperience = (event, index) => {
-    const { name, value } = event.target;
-    this.setState((prevState) => {
-      const updatedWorkExperience = [...prevState.workExperience];
-      updatedWorkExperience[index][name] = value;
-      return { workExperience: updatedWorkExperience };
-    });
-  };
-
-  handleAddInputOnWorkExperience = () => {
-    const { workExperience } = this.state;
-    const newWorkExperience = {
+  handleAddInput = (section, defaultData) => {
+    const { [section]: currentSection } = this.state;
+    const newInput = {
       id: uniqid(),
-      company: 'Google',
-      position: 'Software Engineer',
-      startDate: '2020',
-      endDate: '2021'
+      ...defaultData
     };
-    this.setState({ workExperience: [...workExperience, newWorkExperience] });
+    this.setState({ [section]: [...currentSection, newInput] });
   };
 
-  handleRemoveInputOnWorkExperience = (id) => {
-    const { workExperience } = this.state;
-    const filteredworkExperience = workExperience.filter(input => input.id !== id);
-    this.setState({ workExperience: filteredworkExperience });
+  handleRemoveInput = (section, id) => {
+    const { [section]: currentSection } = this.state;
+    const filteredSection = currentSection.filter(input => input.id !== id);
+    this.setState({ [section]: filteredSection });
   };
 
-  handleChangeOnEducation = (event, index) => {
-    const { name, value } = event.target;
-    this.setState((prevState) => {
-      const updatedEducation= [...prevState.education];
-      updatedEducation[index][name] = value;
-      return { education: updatedEducation};
-    });
-  };
+  renderInputs = (section, defaultData) => {
+    const inputs = this.state[section];
 
-  handleAddInputOnEducation= () => {
-    const { education } = this.state;
-    const newEducation= {
-      id: uniqid(),
-      university: 'Harvard',
-      startDate: 'October 2020',
-      endDate: 'Present'
-    };
-    this.setState({ education: [...education, newEducation] });
-  };
-
-  handleRemoveInputOnEducation= (id) => {
-    const { education } = this.state;
-    const filteredEducation = education.filter(input => input.id !== id);
-    this.setState({ education: filteredEducation});
+    return inputs.map((input, index) => (
+      <div key={input.id} className="cvEditor">
+        {Object.keys(defaultData).map((key) => (
+          <label key={key}>
+          {key[0].toUpperCase() + key.substring(1).replace(/([A-Z])/g, ' $1').toLowerCase() + ':'}
+            <input
+              type="text"
+              name={key}
+              value={input[key]}
+              onChange={(event) => this.handleChange(event, section, index)}
+            />
+          </label>
+        ))}
+        <br />
+        <button onClick={() => this.handleRemoveInput(section, input.id)}>Remove</button>
+        <br />
+      </div>
+    ));
   };
 
   render() {
-    const { firstName, lastName, email, phone, residence } = this.state.basicInfo;
-    const { workExperience, education } = this.state;
-
     return (
       <div className="cv">
         <div className="cvEditor">
           <h2>Personal details</h2>
-          <label>
-            First Name:
-            <input
-              type="text"
-              name="firstName"
-              value={firstName}
-              onChange={this.handleChangeOnBasicInfo}
-            />
-          </label>
-          <br />
-          <label>
-            Last Name:
-            <input
-              type="text"
-              name="lastName"
-              value={lastName}
-              onChange={this.handleChangeOnBasicInfo}
-            />
-          </label>
-          <br />
-          <label>
-            Email:
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={this.handleChangeOnBasicInfo}
-            />
-          </label>
-          <br />
-          <label>
-            Phone:
-            <input
-              type="tel"
-              name="phone"
-              value={phone}
-              onChange={this.handleChangeOnBasicInfo}
-            />
-          </label>
-          <br />
-          <label>
-            Residence:
-            <input
-              type="text"
-              name="residence"
-              value={residence}
-              onChange={this.handleChangeOnBasicInfo}
-            />
-          </label>
+          {Object.keys(this.state.basicInfo).map((key) => (
+            <label key={key}>
+              {key[0].toUpperCase() + key.substring(1).replace(/([A-Z])/g, ' $1').toLowerCase() + ':'}
+              <input
+                type="text"
+                name={key}
+                value={this.state.basicInfo[key]}
+                onChange={(event) => this.handleChange(event, "basicInfo")}
+              />
+            </label>
+          ))}
           <br />
           <h2>Work experience</h2>
-          {workExperience.map((input, index) => (
-          <div key={input.id} className="cvEditor">
-            <label>
-              Company:
-              <input
-              type="text"
-              name="company"
-              value={input.company}
-              onChange={(event) => this.handleChangeOnWorkExperience(event, index)}
-              />
-            </label>
-            <br />
-            <label>
-              Position:
-              <input
-              type="text"
-              name="position"
-              value={input.position}
-              onChange={(event) => this.handleChangeOnWorkExperience(event, index)}
-              />
-            </label>
-            <br />
-            <label>
-              Start date:
-              <input
-              type="text"
-              name="startDate"
-              value={input.startDate}
-              onChange={(event) => this.handleChangeOnWorkExperience(event, index)}
-              />
-            </label>
-            <br />
-            <label>
-              End date:
-              <input
-              type="text"
-              name="endDate"
-              value={input.endDate}
-              onChange={(event) => this.handleChangeOnWorkExperience(event, index)}
-              />
-            </label>
-            <br />
-            <button onClick={() => this.handleRemoveInputOnWorkExperience(input.id)}>Remove</button>
-            <br />
-          </div>
-          ))}
-          <button onClick={this.handleAddInputOnWorkExperience}>Add Input</button>
+          {this.renderInputs("workExperience", {
+            company: 'Google',
+            position: 'Software Engineer',
+            startDate: '2020',
+            endDate: '2021'
+          })}
+          <button onClick={() => this.handleAddInput("workExperience", {
+            company: 'Google',
+            position: 'Intern',
+            startDate: 'May 2022',
+            endDate: 'Present'
+          })}>Add Input</button>
           <br />
           <h2>Education</h2>
-          {education.map((input, index) => (
-            <div key={input.id} className="cvEditor">
-              <label>
-                University:
+          {this.renderInputs("education", {
+            university: 'Harvard',
+            startDate: 'October 2020',
+            endDate: 'Present'
+          })}
+          <button onClick={() => this.handleAddInput("education", {
+            university: 'Harvard',
+            startDate: 'October 2020',
+            endDate: 'Present'
+          })}>Add Input</button>
+          <br />
+          <h2>Technical skills</h2>
+          {this.renderInputs("skills", {
+            skill: 'JavaScript',
+            achieved: 'used at university courses'
+          })}
+          <button onClick={() => this.handleAddInput("skills", {
+            skill: 'JavaScript',
+            achieved: 'used at university courses'
+          })}>Add Input</button>
+          <br />
+          <h2>Other skills and interests</h2>
+            {Object.keys(this.state.otherSkills).map((key) => (
+              <label key={key}>
+                {key[0].toUpperCase() + key.substring(1).replace(/([A-Z])/g, ' $1').toLowerCase() + ':'}
                 <input
-                type="text"
-                name="university"
-                value={input.university}
-                onChange={(event) => this.handleChangeOnEducation(event, index)}
+                  type="text"
+                  name={key}
+                  value={this.state.otherSkills[key]}
+                  onChange={(event) => this.handleChange(event, "otherSkills")}
                 />
               </label>
-              <br />
-              <label>
-                Start date:
-                <input
-                type="text"
-                name="startDate"
-                value={input.startDate}
-                onChange={(event) => this.handleChangeOnEducation(event, index)}
-                />
-              </label>
-              <br />
-              <label>
-                End date:
-                <input
-                type="text"
-                name="endDate"
-                value={input.endDate}
-                onChange={(event) => this.handleChangeOnEducation(event, index)}
-                />
-              </label>
-              <br />
-              <button onClick={() => this.handleRemoveInputOnEducation(input.id)}>Remove</button>
-              <br />
-            </div>
             ))}
-            <button onClick={this.handleAddInputOnEducation}>Add Input</button>
-          </div>
+        </div>
         <Overview data={this.state}/>
       </div>
     );
