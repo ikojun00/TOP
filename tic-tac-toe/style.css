@@ -97,6 +97,44 @@ input
     border-color: var(--black);
 }
 
+.notifications 
+{
+    position: fixed;
+    top: 30px;
+    right: 20px;
+}
+
+.notifications :where(.toast, .column) {
+    display: flex;
+    align-items: center;
+}
+.notifications .toast {
+    width: 400px;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    border-radius: 4px;
+    padding: 16px 17px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    animation: show_toast 0.3s ease forwards;
+    background-color: var(--light);
+}
+@keyframes show_toast {
+    0% {
+        transform: translateX(100%);
+    }
+    40% {
+        transform: translateX(-5%);
+    }
+    80% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-10px);
+    }
+}
+  
 @media only screen and (max-width: 768px) {
     .selection, .container
     {
@@ -121,5 +159,17 @@ input
         width: auto;
         height: auto;
         font-size: 3rem;
+    }
+    .notifications 
+    {
+        width: 80%;
+        display: flex;
+        justify-content: center;
+    }
+    .notifications .toast 
+    {
+        width: 100%;
+        font-size: 1rem;
+        margin-left: 20px;
     }
 }

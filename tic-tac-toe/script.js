@@ -1,8 +1,8 @@
 const Player = (name) => {
   const getName = () => name;
   const winner = () => {
-    if (name === 'easy' || name === 'unbeatable') alert(`AI has won!`);
-    else alert(`${name} has won!`);
+    if (name === 'easy' || name === 'unbeatable') createToast(`AI has won!`);
+    else createToast(`${name} has won!`);
 
     const spanGameWon = document.getElementById(`${name}`);
     let counterGameWon = parseInt(spanGameWon.innerText);
@@ -40,6 +40,7 @@ const Player = (name) => {
       nextToPlay(player1.slice(0, -1), player2.slice(1));
     } else nextToPlay(player2.slice(1), player1.slice(0, -1));
   };
+
   const ai = () => {
     setTimeout(() => {
       if (name === 'easy') {
@@ -49,6 +50,7 @@ const Player = (name) => {
       } else console.log('Error');
     }, 800);
   };
+
   const move = (e, enemy, count) => {
     if (count % 2 !== 0) {
       e.target.textContent = 'X';
@@ -70,7 +72,7 @@ const Player = (name) => {
         clearingBoard(enemy);
         break;
       } else if (count === 9 && i === 2) {
-        alert(`Tie!`);
+        createToast(`Tie!`);
         clearingBoard(enemy);
         break;
       }
@@ -78,6 +80,17 @@ const Player = (name) => {
   };
   return { move, getName, ai };
 };
+
+function createToast (text) {
+  const notifications = document.querySelector(".notifications")
+  const toast = document.createElement("li");
+  toast.className = `toast`;
+  toast.innerHTML = `<div class="column">
+                         <span>${text}</span>
+                      </div>`;
+  notifications.appendChild(toast);
+  setTimeout(() => notifications.removeChild(notifications.firstChild), 5000)
+}
 
 function easyAI() {
   let i = Math.floor(Math.random() * 3);
