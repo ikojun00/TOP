@@ -161,12 +161,9 @@ li
     position: fixed;
     top: 30px;
     right: 20px;
+    z-index: 9999;
 }
 
-.notifications :where(.toast, .column) {
-    display: flex;
-    align-items: center;
-}
 .notifications .toast {
     width: 400px;
     position: relative;

@@ -131,7 +131,7 @@ function addEventListenerOnButtons() {
           e.preventDefault();
           Card(formData);
           closeForm('myForm');
-          createToastDOM('ToDo removed');
+          createToastDOM('ToDo added');
         }
       } else if (button.id === 'inbox-button') {
         openContent('content-inbox');
