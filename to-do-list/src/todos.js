@@ -1,4 +1,5 @@
 import {
+  createToastDOM,
   createCardDOM,
   detailsCard,
   openForm,
@@ -10,6 +11,7 @@ import { validateForm } from './form';
 
 function removeCard(i) {
   cards.splice(i, 1);
+  createToastDOM('ToDo removed');
   localStorage.setItem('cards', JSON.stringify(cards));
   const content = document.querySelectorAll('.card');
   content.forEach((card) => {
@@ -129,6 +131,7 @@ function addEventListenerOnButtons() {
           e.preventDefault();
           Card(formData);
           closeForm('myForm');
+          createToastDOM('ToDo removed');
         }
       } else if (button.id === 'inbox-button') {
         openContent('content-inbox');

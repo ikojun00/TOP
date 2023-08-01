@@ -156,6 +156,44 @@ li
     
 }
 
+.notifications 
+{
+    position: fixed;
+    top: 30px;
+    right: 20px;
+}
+
+.notifications :where(.toast, .column) {
+    display: flex;
+    align-items: center;
+}
+.notifications .toast {
+    width: 400px;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    border-radius: 4px;
+    padding: 16px 17px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    animation: show_toast 0.3s ease forwards;
+    background-color: lightblue;
+}
+@keyframes show_toast {
+    0% {
+        transform: translateX(100%);
+    }
+    40% {
+        transform: translateX(-5%);
+    }
+    80% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-10px);
+    }
+}
+
 @media only screen and (max-width: 768px) {
     body
     {
@@ -187,5 +225,17 @@ li
     .card-options
     {
         gap: 0;
+    }
+    .notifications 
+    {
+        width: 80%;
+        display: flex;
+        justify-content: center;
+    }
+    .notifications .toast 
+    {
+        width: 100%;
+        font-size: 1rem;
+        margin-left: 20px;
     }
 }

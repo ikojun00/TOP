@@ -67,8 +67,21 @@ function createCardDOM(card, i, id) {
   content.appendChild(child);
 }
 
+function createToastDOM(text) {
+  const notifications = document.querySelector('.notifications');
+  const toast = document.createElement('li');
+  toast.className = `toast`;
+  toast.innerHTML = `<div class="column">
+                         <span>${text}</span>
+                      </div>`;
+  notifications.appendChild(toast);
+  setTimeout(() => notifications.removeChild(notifications.firstChild), 5000);
+  console.log(notifications);
+}
+
 export {
   detailsCard,
+  createToastDOM,
   createCardDOM,
   openForm,
   closeForm,
