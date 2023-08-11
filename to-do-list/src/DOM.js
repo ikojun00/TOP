@@ -75,7 +75,7 @@ function createToastDOM(text) {
                          <span>${text}</span>
                       </div>`;
   notifications.appendChild(toast);
-  setTimeout(() => notifications.removeChild(notifications.firstChild), 5000);
+  setTimeout(() => notifications.removeChild(notifications.firstChild), 3000);
   console.log(notifications);
 }
 
